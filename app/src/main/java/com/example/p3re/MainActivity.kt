@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.AccountBox
 import androidx.compose.material.icons.outlined.AccountCircle
@@ -33,8 +34,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -51,8 +55,6 @@ data class BottomNavigationItem(
     val unselectedIcon: ImageVector,
 )
 
-
-
 class MainActivity : ComponentActivity() {
     //Para el Scaffold
     @OptIn(ExperimentalMaterial3Api::class)
@@ -62,27 +64,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             P3RETheme {
 
-                //NavController y NavHost
-                val navController = rememberNavController()
-
-                //Definix el gráfic de navegació
-                NavHost(navController = navController, startDestination = "Social Links") {
-                    composable("Social Links") {
-                        SocialLinksScreen()
-                    }
-                    composable("Compendium") {
-                        CompendiumScreen()
-                    }
-                    composable("Fusion Calculator") {
-                        CompendiumScreen()
-                    }
-                    composable("100% Guide") {
-                    }
-                }
-
                 //Lista de items de la barra de navegació inferior
                 //Lista de items de la data class creada dalt
-                    val items = listOf(
+                    val itemsNavigationBar = listOf(
                         BottomNavigationItem(
                             title = "S.Links",
                             //PLACEHOLDER DEL ICONO
@@ -111,14 +95,12 @@ class MainActivity : ComponentActivity() {
                         )
 
                     )
-                    //LINEA IMPORTANT, esta variable se encarrega de dixar un item seleccionat per default, y asegurarse de que no se cambie
+
                     var selectedItemIndex by rememberSaveable {
                         //El index per defecte será el primer (0)
                         mutableStateOf(0)
                     }
 
-
-                    //Cambia el nom displayeat en la barra superior (en el scaffold)
                     var selectedTabName by rememberSaveable {
                         mutableStateOf("Social Links")
                     }
@@ -142,48 +124,46 @@ class MainActivity : ComponentActivity() {
                         bottomBar = {
                             //Podria usar un navigationRail per a laterals
                             NavigationBar (
-                                containerColor = Color.Blue,
+                                containerColor = Color.Cyan,
                             ) {
-
                                 //items es el nom de la llista de BottonNavigationItems de la navigation bar (tot creat dalt)
                                 //for each, per cada item se mostra el seu corresponent NavigationBarItem depenent del index
                                 //index es autoincremental, comença en 0
-                                items.forEachIndexed { index, item ->  NavigationBarItem(
-
+                                itemsNavigationBar.forEachIndexed { index, itemsNavigationBar ->  NavigationBarItem(
                                     //posara el valor per defecte de la variable de dalt
                                     selected = selectedItemIndex == index,
                                     onClick = {
                                         selectedItemIndex = index
                                         //Busca els items per el nom exacte (el .title vamos)
-                                        if (item.title == "S.Links"){
+                                        if (itemsNavigationBar.title == "S.Links"){
                                             selectedTabName =  "Social Links"
                                         }
-                                        if (item.title == "Compendium") {
+                                        if (itemsNavigationBar.title == "Compendium") {
                                             selectedTabName = "Compendium"
                                         }
-                                        if (item.title == "Fusion Calc"){
+                                        if (itemsNavigationBar.title == "Fusion Calc"){
                                             selectedTabName = "Fusion Calculator"
                                         }
-                                        if (item.title == "100% Guide"){
+                                        if (itemsNavigationBar.title == "100% Guide"){
                                             selectedTabName = "100% Guide"
                                         }
                                     },
                                     //Nom del item per al menú
                                     label = {
-                                      Text(text = item.title)
+                                      Text(text = itemsNavigationBar.title)
                                     },
                                     icon = {
                                         Icon (
                                             //si el index coincidix en el item seleccionat per l'usuari (o el default) mostra l'icona en mode seleccionat, si no la no seleccionada
                                             imageVector =
                                             if(index == selectedItemIndex){
-                                               item.selectedIcon
+                                                itemsNavigationBar.selectedIcon
                                             }else {
-                                              item.unselectedIcon
+                                                itemsNavigationBar.unselectedIcon
                                             },
                                             //contentDescription es sobretot por a la accessibilitat, per a que per exemple persones cegues sápiguen on estan navegant dins l'aplicació
                                             //(p.e TalkBack en este cas diría el titol del meu item
-                                            contentDescription = item.title,
+                                            contentDescription = itemsNavigationBar.title,
                                         )
                                     })}
                             }
