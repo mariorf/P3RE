@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.VectorConverter
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -20,6 +22,8 @@ import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.*
+import androidx.compose.material3.AlertDialogDefaults.containerColor
+import androidx.compose.material3.ListItemDefaults.contentColor
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -27,6 +31,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
@@ -54,6 +61,25 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             P3RETheme {
+
+                //NavController y NavHost
+                val navController = rememberNavController()
+
+                //Definix el gráfic de navegació
+                NavHost(navController = navController, startDestination = "Social Links") {
+                    composable("Social Links") {
+                        SocialLinksScreen()
+                    }
+                    composable("Compendium") {
+                        CompendiumScreen()
+                    }
+                    composable("Fusion Calculator") {
+                        CompendiumScreen()
+                    }
+                    composable("100% Guide") {
+                    }
+                }
+
                 //Lista de items de la barra de navegació inferior
                 //Lista de items de la data class creada dalt
                     val items = listOf(
@@ -91,19 +117,34 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf(0)
                     }
 
+
+                    //Cambia el nom displayeat en la barra superior (en el scaffold)
+                    var selectedTabName by rememberSaveable {
+                        mutableStateOf("Social Links")
+                    }
+
                 Surface  (
                     //Modifier es solo para el tamaño?
                     modifier = Modifier.fillMaxSize(),
-                    //Por que .background?
-                    color = MaterialTheme.colorScheme.background
                 ) {
-                    val navController = rememberNavController()
-
                     //Que es un Scaffold?
                     Scaffold (
+                        //TOP BAR
+                        topBar = {
+                            TopAppBar(
+                                title = {
+                                    Text(selectedTabName)
+                                }
+                            )
+                        },
+
+                        //BOTTOM BAR
                         bottomBar = {
                             //Podria usar un navigationRail per a laterals
-                            NavigationBar {
+                            NavigationBar (
+                                containerColor = Color.Blue,
+                            ) {
+
                                 //items es el nom de la llista de BottonNavigationItems de la navigation bar (tot creat dalt)
                                 //for each, per cada item se mostra el seu corresponent NavigationBarItem depenent del index
                                 //index es autoincremental, comença en 0
@@ -113,7 +154,19 @@ class MainActivity : ComponentActivity() {
                                     selected = selectedItemIndex == index,
                                     onClick = {
                                         selectedItemIndex = index
-                                        navController.navigate()
+                                        //Busca els items per el nom exacte (el .title vamos)
+                                        if (item.title == "S.Links"){
+                                            selectedTabName =  "Social Links"
+                                        }
+                                        if (item.title == "Compendium") {
+                                            selectedTabName = "Compendium"
+                                        }
+                                        if (item.title == "Fusion Calc"){
+                                            selectedTabName = "Fusion Calculator"
+                                        }
+                                        if (item.title == "100% Guide"){
+                                            selectedTabName = "100% Guide"
+                                        }
                                     },
                                     //Nom del item per al menú
                                     label = {
@@ -133,13 +186,12 @@ class MainActivity : ComponentActivity() {
                                             contentDescription = item.title,
                                         )
                                     })}
-
                             }
-                        }
-
+                        },
                     ) {
                         paddingValues -> paddingValues
                     }
+                    CompendiumScreen()
                 }
             }
         }

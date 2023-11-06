@@ -15,18 +15,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CompendiumScreen() {
+fun SocialLinksScreen() {
     Box(modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "compendium")
+        Text(text = "socialLinks")
     }
 }
 
 
 @Composable
 @Preview(showBackground = true)
-fun HomeScreenPreview() {
+fun SocialLinksScreenPreview() {
 
-    CompendiumScreen()
+    SocialLinksScreen()
 }
