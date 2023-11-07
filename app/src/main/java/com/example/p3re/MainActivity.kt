@@ -2,13 +2,22 @@ package com.example.p3re
 
 import android.icu.text.CaseMap.Title
 import android.os.Bundle
+import android.text.style.BackgroundColorSpan
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.VectorConverter
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
@@ -36,15 +45,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHost
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.unit.dp
 import com.example.p3re.ui.theme.P3RETheme
 
 //Clase per a crear els items de la barra de navegació inferior
@@ -106,25 +107,28 @@ class MainActivity : ComponentActivity() {
                     }
 
                 Surface  (
-                    //Modifier es solo para el tamaño?
                     modifier = Modifier.fillMaxSize(),
+
+
                 ) {
-                    //Que es un Scaffold?
                     Scaffold (
                         //TOP BAR
                         topBar = {
                             TopAppBar(
                                 title = {
                                     Text(selectedTabName)
-                                }
+                                },
+                                //https://stackoverflow.com/questions/73982907/compose-topappbar-has-no-background-color
+                                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color(254, 201, 97))
                             )
                         },
+
 
                         //BOTTOM BAR
                         bottomBar = {
                             //Podria usar un navigationRail per a laterals
                             NavigationBar (
-                                containerColor = Color.Cyan,
+                                containerColor = Color(48, 62, 140)
                             ) {
                                 //items es el nom de la llista de BottonNavigationItems de la navigation bar (tot creat dalt)
                                 //for each, per cada item se mostra el seu corresponent NavigationBarItem depenent del index
@@ -150,7 +154,9 @@ class MainActivity : ComponentActivity() {
                                     },
                                     //Nom del item per al menú
                                     label = {
-                                      Text(text = itemsNavigationBar.title)
+
+                                      Text(text = itemsNavigationBar.title, color = Color.White)
+
                                     },
                                     icon = {
                                         Icon (
@@ -170,8 +176,15 @@ class MainActivity : ComponentActivity() {
                         },
                     ) {
                         paddingValues -> paddingValues
+
+                        LazyColumn(
+                            Modifier.padding(top = 65.dp, bottom = 80.dp).background(color = Color(63, 97, 166)).fillMaxSize()
+                        ) {
+                            items(60) { index ->
+                                Text(text = "Item: $index")
+                            }
+                        }
                     }
-                    CompendiumScreen()
                 }
             }
         }
