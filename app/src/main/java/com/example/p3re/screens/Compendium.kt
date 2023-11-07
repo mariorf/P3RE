@@ -1,22 +1,32 @@
 package com.example.p3re.screens
 
+import android.graphics.fonts.FontStyle
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.p3re.R
 import com.example.p3re.ShadowsData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -1535,13 +1545,23 @@ val shadowMap: Map<String, ShadowsData> = gson.fromJson(json, mapType)
 // Convert the map to a list of ShadowsData objects
 val shadowsList = shadowMap.values.toList()
 
+//https://developer.android.com/jetpack/compose/text/fonts
+@RequiresApi(Build.VERSION_CODES.Q)
+val minervaFamily = FontFamily(
+    Font(R.font.minerva_modern_black),
+    Font(R.font.minerva_modern_black_italic),
+    Font(R.font.minerva_modern_bold),
+    Font(R.font.minerva_modern_italic),
+    Font(R.font.minerva_modern_bold_italic)
+)
 
+@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun CompendiumScreen() {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(63, 97, 166)),
+            .background(color = Color(15, 139, 237)),
         content = {
             items(shadowsList.size) { index ->
                 val shadow = shadowsList[index]
@@ -1550,26 +1570,46 @@ fun CompendiumScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
-                        .background(Color(138, 181, 191))
+                        .background(Color(2, 46, 73))
                         .clickable {
+
                         }
                 ) {
-                    Text(
-                        text = shadow.name,
-                        color = Color.White,
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(16.dp)
-                    )
+                    //Row dentro de la box principal para añadir el cuadrito de color amarillo
+                    //Esta rodea al cuadro amarillo y al texto, si quisiera añadir mas elementos a
+                    //cada nombre se añadiría aquí
+                    Row(
+                        modifier = Modifier.fillMaxSize().padding(horizontal = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+
+                    ) {
+                        //Esta Box es el cuadrito pequeño
+                        Box(
+                            modifier = Modifier
+                                .size(16.dp)
+                                .background(Color(254, 189, 97))
+                        )
+                        Text(
+                            text = shadow.name,
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            modifier = Modifier.padding(start = 8.dp, top = 16.dp, bottom = 16.dp),
+                            fontFamily = minervaFamily,
+                            fontWeight = FontWeight.Normal,
+                        )
+                    }
                 }
             }
         }
     )
 }
 
+
+@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 @Preview(showBackground = true)
 fun HomeScreenPreview() {
 
-    val navController = rememberNavController()
+
     CompendiumScreen()
 }

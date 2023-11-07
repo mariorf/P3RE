@@ -1,8 +1,10 @@
 package com.example.p3re
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -24,6 +26,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -42,6 +47,7 @@ data class BottomNavigationItem(
 
 class MainActivity : ComponentActivity() {
     //Para el Scaffold
+    @RequiresApi(Build.VERSION_CODES.Q)
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +57,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@RequiresApi(Build.VERSION_CODES.Q)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavController) {
@@ -107,15 +114,13 @@ fun MainScreen(navController: NavController) {
                 topBar = {
                     TopAppBar(
                         title = {
-                            Text(selectedTabName)
+                            Text(
+                                text = selectedTabName,
+                                color = Color(254, 189, 97))
                         },
                         //https://stackoverflow.com/questions/73982907/compose-topappbar-has-no-background-color
                         colors = TopAppBarDefaults.smallTopAppBarColors(
-                            containerColor = Color(
-                                254,
-                                201,
-                                97
-                            )
+                            containerColor = Color(0, 41, 63)
                         )
                     )
                 },
@@ -125,7 +130,7 @@ fun MainScreen(navController: NavController) {
                 bottomBar = {
                     //Podria usar un navigationRail per a laterals
                     NavigationBar(
-                        containerColor = Color(48, 62, 140)
+                        containerColor = Color(0, 41, 63)
                     ) {
                         //LOOP ITEMS
                         //items es el nom de la llista de BottonNavigationItems de la navigation bar (tot creat dalt)
@@ -155,8 +160,8 @@ fun MainScreen(navController: NavController) {
                                 //Nom del item per al menú
                                 label = {
 
-                                    Text(text = itemsNavigationBar.title, color = Color.White)
-
+                                    Text(text = itemsNavigationBar.title,
+                                        color = Color(15, 139, 237))
                                 },
                                 icon = {
                                     Icon(
