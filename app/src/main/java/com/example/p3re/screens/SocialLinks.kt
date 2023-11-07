@@ -32,7 +32,4 @@ fun SocialLinksScreen() {
 @Preview(showBackground = true)
 fun SocialLinksScreenPreview() {
 
-    val navController = rememberNavController()
-
-    SocialLinksScreen()
 }

@@ -2,6 +2,7 @@ package com.example.p3re.screens
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -1538,7 +1539,9 @@ val shadowsList = shadowMap.values.toList()
 @Composable
 fun CompendiumScreen() {
     LazyColumn(
-        modifier = Modifier.fillMaxSize().background(color = Color(63, 97, 166)),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color(63, 97, 166)),
         content = {
             items(shadowsList.size) { index ->
                 val shadow = shadowsList[index]
@@ -1547,7 +1550,9 @@ fun CompendiumScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
-                        .background(Color.Blue)
+                        .background(Color(138, 181, 191))
+                        .clickable {
+                        }
                 ) {
                     Text(
                         text = shadow.name,
@@ -1560,8 +1565,6 @@ fun CompendiumScreen() {
         }
     )
 }
-
-
 
 @Composable
 @Preview(showBackground = true)
