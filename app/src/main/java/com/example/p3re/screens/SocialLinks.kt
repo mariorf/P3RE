@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 
 //RECIBEN COMO PARAMETROS NAV CONTROLLERS LAS FUNCIONES A LAS QUE VAS A TENER QUE PODER NAVEGAR
 @Composable
-fun SocialLinksScreen(navController: NavController) {
+fun SocialLinksScreen() {
 
     Box(modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -30,5 +30,5 @@ fun SocialLinksScreenPreview() {
 
     val navController = rememberNavController()
 
-    SocialLinksScreen(navController)
+    SocialLinksScreen()
 }
