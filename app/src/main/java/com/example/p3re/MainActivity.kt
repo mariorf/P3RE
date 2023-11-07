@@ -46,6 +46,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.p3re.screens.CompendiumScreen
+import com.example.p3re.screens.navigation.AppNavigation
 import com.example.p3re.ui.theme.P3RETheme
 
 //Clase per a crear els items de la barra de navegació inferior
@@ -69,6 +71,7 @@ class MainActivity : ComponentActivity() {
                 //Lista de items de la data class creada dalt
                     val itemsNavigationBar = listOf(
                         BottomNavigationItem(
+
                             title = "S.Links",
                             //PLACEHOLDER DEL ICONO
                             selectedIcon = Icons.Filled.Home,
@@ -109,7 +112,6 @@ class MainActivity : ComponentActivity() {
                 Surface  (
                     modifier = Modifier.fillMaxSize(),
 
-
                 ) {
                     Scaffold (
                         //TOP BAR
@@ -130,10 +132,12 @@ class MainActivity : ComponentActivity() {
                             NavigationBar (
                                 containerColor = Color(48, 62, 140)
                             ) {
+                                //LOOP ITEMS
                                 //items es el nom de la llista de BottonNavigationItems de la navigation bar (tot creat dalt)
                                 //for each, per cada item se mostra el seu corresponent NavigationBarItem depenent del index
                                 //index es autoincremental, comença en 0
                                 itemsNavigationBar.forEachIndexed { index, itemsNavigationBar ->  NavigationBarItem(
+
                                     //posara el valor per defecte de la variable de dalt
                                     selected = selectedItemIndex == index,
                                     onClick = {
@@ -141,6 +145,7 @@ class MainActivity : ComponentActivity() {
                                         //Busca els items per el nom exacte (el .title vamos)
                                         if (itemsNavigationBar.title == "S.Links"){
                                             selectedTabName =  "Social Links"
+
                                         }
                                         if (itemsNavigationBar.title == "Compendium") {
                                             selectedTabName = "Compendium"
@@ -172,17 +177,21 @@ class MainActivity : ComponentActivity() {
                                             contentDescription = itemsNavigationBar.title,
                                         )
                                     })}
+                                //AQUI ACABA EL LOOP DE LOS ITEMS
                             }
                         },
+
                     ) {
+                        //CONTENIDO DENTRO DEL SCAFFOLD
                         paddingValues -> paddingValues
 
-                        LazyColumn(
-                            Modifier.padding(top = 65.dp, bottom = 80.dp).background(color = Color(63, 97, 166)).fillMaxSize()
+                        Box(
+                            Modifier
+                                .padding(top = 64.dp, bottom = 80.dp)
+                                .fillMaxSize()
                         ) {
-                            items(60) { index ->
-                                Text(text = "Item: $index")
-                            }
+                            //Se llama a app navigation porque es el unico que "conoce" la cantidad de pantallas, su estado y tiene la capacidad de navegar
+                            AppNavigation()
                         }
                     }
                 }
