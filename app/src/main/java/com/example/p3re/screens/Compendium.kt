@@ -27,9 +27,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.p3re.R
+import com.example.p3re.R.font
 import com.example.p3re.ShadowsData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import android.content.res.AssetManager
+
+
 
 //RECIBEN COMO PARAMETROS NAV CONTROLLERS LAS FUNCIONES A LAS QUE VAS A TENER QUE PODER NAVEGAR
 
@@ -1549,7 +1553,7 @@ val shadowsList = shadowMap.values.toList()
 @RequiresApi(Build.VERSION_CODES.Q)
 val minervaFamily = FontFamily(
     Font(R.font.minerva_modern_black),
-    Font(R.font.minerva_modern_black_italic),
+    Font(R.font.minerva_modern_bold_italic),
     Font(R.font.minerva_modern_bold),
     Font(R.font.minerva_modern_italic),
     Font(R.font.minerva_modern_bold_italic)
