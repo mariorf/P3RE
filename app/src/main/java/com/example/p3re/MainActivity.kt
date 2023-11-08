@@ -1,5 +1,6 @@
 package com.example.p3re
 
+import android.annotation.SuppressLint
 import android.icu.text.CaseMap.Title
 import android.os.Build
 import android.os.Bundle
@@ -49,8 +50,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.example.p3re.screens.CompendiumScreen
 import com.example.p3re.screens.FusionCalculatorScreen
+import com.example.p3re.screens.NavGraph
+import com.example.p3re.screens.Screen
 import com.example.p3re.screens.SocialLinksScreen
 import com.example.p3re.screens.minervaFamily
 import com.example.p3re.ui.theme.P3RETheme
@@ -69,6 +73,7 @@ data class BottomNavigationItem(
 
 class MainActivity : ComponentActivity() {
     //Para el Scaffold
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @RequiresApi(Build.VERSION_CODES.Q)
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +82,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             P3RETheme {
 
+                val navController = rememberNavController()
                 //Lista de items de la barra de navegació inferior
                 //Lista de items de la data class creada dalt
                     val itemsNavigationBar = listOf(
@@ -174,6 +180,13 @@ class MainActivity : ComponentActivity() {
                                     //posara el valor per defecte de la variable de dalt
                                     selected = selectedItemIndex == index,
                                     onClick = {
+
+                                        when (itemsNavigationBar.title) {
+                                            "S.Links" -> navController.navigate(Screen.SocialLinks.route)
+                                            "Shadows" -> navController.navigate(Screen.Shadows.route)
+                                            "Fusion Calc" -> navController.navigate(Screen.FusionCalculator.route)
+                                            "100% Guide" -> navController.navigate(Screen.Guide.route)
+                                        }
                                         selectedItemIndex = index
                                         //Busca els items per el nom exacte (el .title vamos) y cambia el nom de la topBar
                                         if (itemsNavigationBar.title == "S.Links"){
@@ -212,19 +225,8 @@ class MainActivity : ComponentActivity() {
                             }
                         },
                     ) {
-                        paddingValues -> paddingValues
-                        if(selectedItemIndex==0){
-                            SocialLinksScreen()
-                        }
-                        if(selectedItemIndex==1){
-                            CompendiumScreen()
-                        }
-                        if(selectedItemIndex==2){
-                            FusionCalculatorScreen()
-                        }
-                        if(selectedItemIndex==3){
-                            CompendiumScreen()
-                        }
+
+                        NavGraph(navController)
                     }
                 }
             }
