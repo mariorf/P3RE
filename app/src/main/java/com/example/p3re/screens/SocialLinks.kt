@@ -39,6 +39,10 @@ import java.io.File
 fun SocialLinksScreen() {
 //PERSONA 3 TIENE 30 SLINKS
 
+    LazyColumn(modifier = Modifier.fillMaxSize().background(Color(15, 139, 237))){
+
+    }
+
 }
 
 
