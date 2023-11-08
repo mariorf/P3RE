@@ -32,7 +32,7 @@ import com.example.p3re.ShadowsData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import android.content.res.AssetManager
-
+import androidx.navigation.NavHostController
 
 
 //RECIBEN COMO PARAMETROS NAV CONTROLLERS LAS FUNCIONES A LAS QUE VAS A TENER QUE PODER NAVEGAR
@@ -1561,7 +1561,8 @@ val minervaFamily = FontFamily(
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
-fun CompendiumScreen() {
+//QUe es este NAvHostCOntroller
+fun CompendiumScreen(navController: NavHostController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -1576,8 +1577,7 @@ fun CompendiumScreen() {
                         .padding(8.dp)
                         .background(Color(2, 46, 73))
                         .clickable {
-
-                        }
+                            navController.navigate(Screen.DetailedShadow.route)}
                 ) {
                     //Row dentro de la box principal para añadir el cuadrito de color amarillo
                     //Esta rodea al cuadro amarillo y al texto, si quisiera añadir mas elementos a
@@ -1609,11 +1609,11 @@ fun CompendiumScreen() {
 }
 
 
-@RequiresApi(Build.VERSION_CODES.Q)
+/*RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 @Preview(showBackground = true)
 fun HomeScreenPreview() {
 
 
     CompendiumScreen()
-}
+}*/
