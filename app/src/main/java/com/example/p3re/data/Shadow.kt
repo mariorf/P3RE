@@ -1,7 +1,6 @@
 package com.example.p3re.data
 
-import Converters
-import androidx.room.ColumnInfo
+import com.example.p3re.data.Converters
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters

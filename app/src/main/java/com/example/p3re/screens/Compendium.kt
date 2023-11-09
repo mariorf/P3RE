@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +28,7 @@ import androidx.room.TypeConverters
 import com.example.p3re.R
 import com.example.p3re.data.Shadow
 import com.example.p3re.data.ShadowDAO
+import com.example.p3re.data.ShadowViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.concurrent.Executors
@@ -1561,14 +1563,14 @@ val minervaFamily = FontFamily(
 @Composable
 @TypeConverters
 //Que es este NavHostController
-fun CompendiumScreen(navController: NavHostController, shadowDAO: ShadowDAO) {
+fun CompendiumScreen(navController: NavHostController) {
 
     //Corutine
-        LaunchedEffect(Unit) {
-            shadowDAO.insertAll(shadowsList)
-        }
+    /*LaunchedEffect(Unit) {
+        shadowDAO.insertAll(shadowsList)
+    }*/
 
-    //val shadowViewModel = remember { ShadowViewModel() }
+    val shadowViewModel = remember { ShadowViewModel() }
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -1585,7 +1587,7 @@ fun CompendiumScreen(navController: NavHostController, shadowDAO: ShadowDAO) {
                         .clickable {
 
 
-                            //shadowViewModel.shadowSelector(shadow)
+                            shadowViewModel.shadowSelector(shadow)
                             navController.navigate(Screen.DetailedShadow.route)
                         }
                 ) {
@@ -1598,7 +1600,7 @@ fun CompendiumScreen(navController: NavHostController, shadowDAO: ShadowDAO) {
                             .padding(horizontal = 10.dp),
                         verticalAlignment = Alignment.CenterVertically,
 
-                    ) {
+                        ) {
                         //Esta Box es el cuadrito pequeño
                         Box(
                             modifier = Modifier

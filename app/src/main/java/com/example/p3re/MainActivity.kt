@@ -70,6 +70,8 @@ import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.room.Room
+import com.example.p3re.data.Shadow
+import com.example.p3re.data.ShadowDAO
 import com.example.p3re.data.ShadowDatabase
 import com.example.p3re.data.ShadowViewModel
 
@@ -89,12 +91,8 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             P3RETheme {
-
-                val baseDeDatos = Room.databaseBuilder(this, ShadowDatabase::class.java, "nombre_de_la_base_de_datos").build()
-                val tuDao = baseDeDatos.shadowDao
 
                 val navController = rememberNavController()
                 //Lista de items de la barra de navegació inferior
