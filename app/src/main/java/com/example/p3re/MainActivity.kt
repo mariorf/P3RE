@@ -1,6 +1,7 @@
 package com.example.p3re
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.icu.text.CaseMap.Title
 import android.os.Build
 import android.os.Bundle
@@ -58,10 +59,20 @@ import com.example.p3re.screens.Screen
 import com.example.p3re.screens.SocialLinksScreen
 import com.example.p3re.screens.minervaFamily
 import com.example.p3re.ui.theme.P3RETheme
+import com.google.gson.Gson
 import java.io.File
 import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 import java.text.SimpleDateFormat
 import java.util.Date
+import androidx.compose.runtime.remember
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.room.Room
+import com.example.p3re.data.ShadowDatabase
+import com.example.p3re.data.ShadowViewModel
+
 
 //Clase per a crear els items de la barra de navegació inferior
 data class BottomNavigationItem(
@@ -82,53 +93,59 @@ class MainActivity : ComponentActivity() {
         setContent {
             P3RETheme {
 
+                val baseDeDatos = Room.databaseBuilder(this, ShadowDatabase::class.java, "nombre_de_la_base_de_datos").build()
+                val tuDao = baseDeDatos.shadowDao
+
                 val navController = rememberNavController()
                 //Lista de items de la barra de navegació inferior
                 //Lista de items de la data class creada dalt
-                    val itemsNavigationBar = listOf(
-                        BottomNavigationItem(
-                            title = "S.Links",
-                            //PLACEHOLDER DEL ICONO
-                            selectedIcon = Icons.Filled.Home,
-                            unselectedIcon = Icons.Outlined.Home,
-                        ),
-                        BottomNavigationItem(
-                            title = "Shadows",
-                            //PLACEHOLDER DEL ICONO
-                            selectedIcon = Icons.Filled.AccountCircle,
-                            unselectedIcon = Icons.Outlined.AccountCircle,
-                        ),
+                val itemsNavigationBar = listOf(
+                    BottomNavigationItem(
+                        title = "S.Links",
+                        //PLACEHOLDER DEL ICONO
+                        selectedIcon = Icons.Filled.Home,
+                        unselectedIcon = Icons.Outlined.Home,
+                    ),
+                    BottomNavigationItem(
+                        title = "Shadows",
+                        //PLACEHOLDER DEL ICONO
+                        selectedIcon = Icons.Filled.AccountCircle,
+                        unselectedIcon = Icons.Outlined.AccountCircle,
+                    ),
 
-                        BottomNavigationItem(
-                            title = "Fusion Calc",
-                            //PLACEHOLDER DEL ICONO
-                            selectedIcon = Icons.Filled.Add,
-                            unselectedIcon = Icons.Outlined.Add,
-                        ),
+                    BottomNavigationItem(
+                        title = "Fusion Calc",
+                        //PLACEHOLDER DEL ICONO
+                        selectedIcon = Icons.Filled.Add,
+                        unselectedIcon = Icons.Outlined.Add,
+                    ),
 
-                        BottomNavigationItem(
-                            title = "100% Guide",
-                            //PLACEHOLDER DEL ICONO
-                            selectedIcon = Icons.Filled.Create,
-                            unselectedIcon = Icons.Outlined.Create,
-                        )
-
+                    BottomNavigationItem(
+                        title = "Answers",
+                        //PLACEHOLDER DEL ICONO
+                        selectedIcon = Icons.Filled.Create,
+                        unselectedIcon = Icons.Outlined.Create,
                     )
 
-                    var selectedItemIndex by rememberSaveable {
-                        //El index per defecte será el primer (0)
-                        mutableStateOf(0)
-                    }
+                )
 
-                    var selectedTabNameTop by rememberSaveable {
-                        mutableStateOf("SOCIAL LINKS")
-                    }
+                // Define el ViewModel
+                val viewModel: ShadowViewModel = viewModel()
 
-                     var currentDate: Date = Date()
+                var selectedItemIndex by rememberSaveable {
+                    //El index per defecte será el primer (0)
+                    mutableStateOf(0)
+                }
 
-                Surface  (
+                var selectedTabNameTop by rememberSaveable {
+                    mutableStateOf("SOCIAL LINKS")
+                }
+
+                var currentDate: Date = Date()
+
+                Surface(
                 ) {
-                    Scaffold (
+                    Scaffold(
                         //TOP BAR
                         topBar = {
                             TopAppBar(
@@ -162,7 +179,9 @@ class MainActivity : ComponentActivity() {
                                     }
                                 },
                                 //https://stackoverflow.com/questions/73982907/compose-topappbar-has-no-background-color
-                                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color(254, 201, 97))
+                                colors = TopAppBarDefaults.smallTopAppBarColors(
+                                    containerColor = Color(254, 201, 97)
+                                )
                             )
                         },
 
@@ -170,62 +189,66 @@ class MainActivity : ComponentActivity() {
                         //BOTTOM BAR
                         bottomBar = {
                             //Podria usar un navigationRail per a laterals
-                            NavigationBar (
+                            NavigationBar(
                                 containerColor = Color(48, 62, 140)
                             ) {
                                 //items es el nom de la llista de BottonNavigationItems de la navigation bar (tot creat dalt)
                                 //for each, per cada item se mostra el seu corresponent NavigationBarItem depenent del index
                                 //index es autoincremental, comença en 0
-                                itemsNavigationBar.forEachIndexed { index, itemsNavigationBar ->  NavigationBarItem(
-                                    //posara el valor per defecte de la variable de dalt
-                                    selected = selectedItemIndex == index,
-                                    onClick = {
+                                itemsNavigationBar.forEachIndexed { index, itemsNavigationBar ->
+                                    NavigationBarItem(
+                                        //posara el valor per defecte de la variable de dalt
+                                        selected = selectedItemIndex == index,
 
-                                        when (itemsNavigationBar.title) {
-                                            "S.Links" -> navController.navigate(Screen.SocialLinks.route)
-                                            "Shadows" -> navController.navigate(Screen.Shadows.route)
-                                            "Fusion Calc" -> navController.navigate(Screen.FusionCalculator.route)
-                                            "100% Guide" -> navController.navigate(Screen.Guide.route)
-                                        }
-                                        selectedItemIndex = index
-                                        //Busca els items per el nom exacte (el .title vamos) y cambia el nom de la topBar
-                                        if (itemsNavigationBar.title == "S.Links"){
-                                            selectedTabNameTop =  "SOCIAL LINKS"
-                                        }
-                                        if (itemsNavigationBar.title == "Shadows") {
-                                            selectedTabNameTop = "SHADOWS"
-                                        }
-                                        if (itemsNavigationBar.title == "Fusion Calc"){
-                                            selectedTabNameTop = "FUSION CALCULATOR"
-                                        }
-                                        if (itemsNavigationBar.title == "100% Guide"){
-                                            selectedTabNameTop = "100% GUIDE"
-                                        }
-                                    },
-                                    //Nom del item per al menú
-                                    label = {
+                                        onClick = {
+                                            selectedItemIndex = index
+                                            //Busca els items per el nom exacte (el .title vamos) y cambia el nom de la topBar
+                                            if (itemsNavigationBar.title == "S.Links") {
+                                                selectedTabNameTop = "SOCIAL LINKS"
+                                                navController.navigate(Screen.SocialLinks.route)
+                                            }
+                                            if (itemsNavigationBar.title == "Shadows") {
+                                                selectedTabNameTop = "SHADOWS"
+                                                navController.navigate(Screen.Shadows.route)
+                                            }
+                                            if (itemsNavigationBar.title == "Fusion Calc") {
+                                                selectedTabNameTop = "FUSION CALCULATOR"
+                                                navController.navigate(Screen.FusionCalculator.route)
+                                            }
+                                            if (itemsNavigationBar.title == "Answers") {
+                                                selectedTabNameTop = "CLASS ANSWERS"
+                                                navController.navigate(Screen.Guide.route)
+                                            }
+                                        },
+                                        //Nom del item per al menú
+                                        label = {
 
-                                      Text(text = itemsNavigationBar.title, color = Color.White, fontFamily = minervaFamily, fontWeight = FontWeight.Normal)
+                                            Text(
+                                                text = itemsNavigationBar.title,
+                                                color = Color.White,
+                                                fontFamily = minervaFamily,
+                                                fontWeight = FontWeight.Normal
+                                            )
 
-                                    },
-                                    icon = {
-                                        Icon (
-                                            //si el index coincidix en el item seleccionat per l'usuari (o el default) mostra l'icona en mode seleccionat, si no la no seleccionada
-                                            imageVector =
-                                            if(index == selectedItemIndex){
-                                                itemsNavigationBar.selectedIcon
-                                            }else {
-                                                itemsNavigationBar.unselectedIcon
-                                            },
-                                            //contentDescription es sobretot por a la accessibilitat, per a que per exemple persones cegues sápiguen on estan navegant dins l'aplicació
-                                            //(p.e TalkBack en este cas diría el titol del meu item
-                                            contentDescription = itemsNavigationBar.title,
-                                        )
-                                    })}
+                                        },
+                                        icon = {
+                                            Icon(
+                                                //si el index coincidix en el item seleccionat per l'usuari (o el default) mostra l'icona en mode seleccionat, si no la no seleccionada
+                                                imageVector =
+                                                if (index == selectedItemIndex) {
+                                                    itemsNavigationBar.selectedIcon
+                                                } else {
+                                                    itemsNavigationBar.unselectedIcon
+                                                },
+                                                //contentDescription es sobretot por a la accessibilitat, per a que per exemple persones cegues sápiguen on estan navegant dins l'aplicació
+                                                //(p.e TalkBack en este cas diría el titol del meu item
+                                                contentDescription = itemsNavigationBar.title,
+                                            )
+                                        })
+                                }
                             }
                         },
                     ) {
-
                         NavGraph(navController)
                     }
                 }

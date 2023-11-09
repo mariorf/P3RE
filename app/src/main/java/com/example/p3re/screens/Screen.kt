@@ -1,20 +1,18 @@
 package com.example.p3re.screens
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavHost
+import androidx.compose.runtime.remember
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.p3re.ShadowsData
+import com.example.p3re.data.ShadowViewModel
 
 sealed class Screen(val route: String){
     object SocialLinks : Screen("social_links")
@@ -28,7 +26,9 @@ sealed class Screen(val route: String){
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun NavGraph(navController: NavHostController) {
-    NavHost(navController, startDestination = Screen.SocialLinks.route) {
+    NavHost(navController, startDestination = Screen.SocialLinks.route,
+        enterTransition = { fadeIn(animationSpec = tween(500)) + slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left) },
+        exitTransition= { fadeOut(animationSpec = tween(500)) }) {
         composable(Screen.SocialLinks.route) {
             SocialLinksScreen()
         }
@@ -41,17 +41,11 @@ fun NavGraph(navController: NavHostController) {
         composable(Screen.Guide.route) {
             //GuideScreen()
         }
-        composable(Screen.DetailedShadow.route) { backStackEntry ->
-            val name = backStackEntry.arguments?.getString("name") ?: ""
-            val shadow = shadowsList.find { it.name == name } ?: ShadowsData("NOT FOUND", "NOT FOUND", "NOT FOUND", 0, "NOT FOUND", "NOT FOUND", arrayDeStrings, arrayDeInts) // O un valor predeterminado válido
-            DetailedShadowScreen(shadow)
+        composable(Screen.DetailedShadow.route) {
+
+            val shadowViewModel = remember { ShadowViewModel() }
+            shadowViewModel.shadowReturn()?.let { it1 -> DetailedShadowScreen(it1) }
+            shadowViewModel.shadowReturn()?.let { DetailedShadowScreen(it) }
         }
     }
 }
-
-// Array de strings
-val arrayDeStrings = listOf("Manzana", "Banana", "Cereza", "Damasco")
-
-// Array de ints
-val arrayDeInts = listOf(1, 2, 3, 4, 5)
-

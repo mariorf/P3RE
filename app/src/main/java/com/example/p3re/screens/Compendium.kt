@@ -1,8 +1,6 @@
 package com.example.p3re.screens
 
-import android.graphics.fonts.FontStyle
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,24 +13,23 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavHostController
+import androidx.room.TypeConverters
 import com.example.p3re.R
-import com.example.p3re.R.font
-import com.example.p3re.ShadowsData
+import com.example.p3re.data.Shadow
+import com.example.p3re.data.ShadowDAO
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import android.content.res.AssetManager
-import androidx.navigation.NavHostController
+import java.util.concurrent.Executors
 
 
 //RECIBEN COMO PARAMETROS NAV CONTROLLERS LAS FUNCIONES A LAS QUE VAS A TENER QUE PODER NAVEGAR
@@ -1542,9 +1539,10 @@ val json = """
 }
 """
 
+
 val gson = Gson()
-val mapType = object : TypeToken<Map<String, ShadowsData>>() {}.type
-val shadowMap: Map<String, ShadowsData> = gson.fromJson(json, mapType)
+val mapType = object : TypeToken<Map<String, Shadow>>() {}.type
+val shadowMap: Map<String, Shadow> = gson.fromJson(json, mapType)
 
 // Convert the map to a list of ShadowsData objects
 val shadowsList = shadowMap.values.toList()
@@ -1561,8 +1559,16 @@ val minervaFamily = FontFamily(
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
-//QUe es este NAvHostCOntroller
-fun CompendiumScreen(navController: NavHostController) {
+@TypeConverters
+//Que es este NavHostController
+fun CompendiumScreen(navController: NavHostController, shadowDAO: ShadowDAO) {
+
+    //Corutine
+        LaunchedEffect(Unit) {
+            shadowDAO.insertAll(shadowsList)
+        }
+
+    //val shadowViewModel = remember { ShadowViewModel() }
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -1577,13 +1583,19 @@ fun CompendiumScreen(navController: NavHostController) {
                         .padding(8.dp)
                         .background(Color(2, 46, 73))
                         .clickable {
-                            navController.navigate(Screen.DetailedShadow.route)}
+
+
+                            //shadowViewModel.shadowSelector(shadow)
+                            navController.navigate(Screen.DetailedShadow.route)
+                        }
                 ) {
                     //Row dentro de la box principal para añadir el cuadrito de color amarillo
                     //Esta rodea al cuadro amarillo y al texto, si quisiera añadir mas elementos a
                     //cada nombre se añadiría aquí
                     Row(
-                        modifier = Modifier.fillMaxSize().padding(horizontal = 10.dp),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 10.dp),
                         verticalAlignment = Alignment.CenterVertically,
 
                     ) {
@@ -1607,6 +1619,7 @@ fun CompendiumScreen(navController: NavHostController) {
         }
     )
 }
+
 
 
 /*RequiresApi(Build.VERSION_CODES.Q)
