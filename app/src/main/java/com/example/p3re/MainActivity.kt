@@ -3,6 +3,7 @@ package com.example.p3re
 import android.annotation.SuppressLint
 import android.content.Context
 import android.icu.text.CaseMap.Title
+import android.icu.text.DateFormat.HourCycle
 import android.os.Build
 import android.os.Bundle
 import android.text.style.BackgroundColorSpan
@@ -150,12 +151,12 @@ class MainActivity : ComponentActivity() {
                                 title = {
                                     Row(
                                         modifier = Modifier.fillMaxWidth(),
-                                        //Que hace esto exactamente?
+                                        //esto hace que haya un espacio entre los elementos de la topBar
                                         horizontalArrangement = Arrangement.SpaceBetween,
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Text(
-                                            text = selectedTabNameTop,
+                                            text = viewModel.selectedTabName.value,
                                             fontFamily = minervaFamily,
                                             fontWeight = FontWeight.Normal
                                         )
@@ -196,31 +197,10 @@ class MainActivity : ComponentActivity() {
                                 itemsNavigationBar.forEachIndexed { index, itemsNavigationBar ->
                                     NavigationBarItem(
                                         //posara el valor per defecte de la variable de dalt
-                                        selected = selectedItemIndex == index,
+                                        selected = false,
 
-                                        onClick = {
-                                            selectedItemIndex = index
-                                            //Busca els items per el nom exacte (el .title vamos) y cambia el nom de la topBar
-                                            if (itemsNavigationBar.title == "S.Links") {
-                                                selectedTabNameTop = "SOCIAL LINKS"
-                                                navController.navigate(Screen.SocialLinks.route)
-                                            }
-                                            if (itemsNavigationBar.title == "Shadows") {
-                                                selectedTabNameTop = "SHADOWS"
-                                                navController.navigate(Screen.Shadows.route)
-                                            }
-                                            if (itemsNavigationBar.title == "Fusion Calc") {
-                                                selectedTabNameTop = "FUSION CALCULATOR"
-                                                navController.navigate(Screen.FusionCalculator.route)
-                                            }
-                                            if (itemsNavigationBar.title == "Answers") {
-                                                selectedTabNameTop = "CLASS ANSWERS"
-                                                navController.navigate(Screen.Guide.route)
-                                            }
-                                        },
-                                        //Nom del item per al menú
+                                        //Nom del item per al menú (bottom)
                                         label = {
-
                                             Text(
                                                 text = itemsNavigationBar.title,
                                                 color = Color.White,
@@ -229,6 +209,29 @@ class MainActivity : ComponentActivity() {
                                             )
 
                                         },
+
+                                        onClick = {
+
+                                            selectedItemIndex = index
+
+                                            //Si el nom del item on click coincideix en alguna de les opcions crida al nav controler y navega hasta ella
+                                            when (itemsNavigationBar.title) {
+                                                "S.Links" -> {
+                                                    navController.navigate(Screen.SocialLinks.route)
+                                                }
+                                                "Shadows" -> {
+                                                    navController.navigate(Screen.Shadows.route)
+                                                }
+                                                "Fusion Calc" -> {
+                                                    navController.navigate(Screen.FusionCalculator.route)
+                                                }
+                                                "Answers" -> {
+                                                    navController.navigate(Screen.Answers.route)
+                                                }
+                                            }
+
+                                        },
+
                                         icon = {
                                             Icon(
                                                 //si el index coincidix en el item seleccionat per l'usuari (o el default) mostra l'icona en mode seleccionat, si no la no seleccionada
@@ -247,7 +250,7 @@ class MainActivity : ComponentActivity() {
                             }
                         },
                     ) {
-                        NavGraph(navController)
+                        NavGraph(navController, viewModel, this)
                     }
                 }
             }

@@ -8,6 +8,8 @@ import java.lang.reflect.Type
 
 
 class Converters {
+
+
     /*@TypeConverter
     fun fromString(value: String?): List<String> {
         val listType = object : TypeToken<List<String?>?>() {}.type
@@ -20,6 +22,8 @@ class Converters {
         return gson.toJson(list)
     }*/
 
+
+    //Guarrada fea que cambia valores complejos a primitivos para que una base de dato pueda leerlos (en mi caso listas de int y de string)
     @TypeConverter
     fun listToJsonString(value: List<String>?): String? = Gson().toJson(value)
 
