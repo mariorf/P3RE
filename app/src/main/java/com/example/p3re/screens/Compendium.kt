@@ -3,6 +3,7 @@ package com.example.p3re.screens
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -20,6 +21,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -103,62 +106,74 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
     //Instancia del viewModel
     val shadowViewModel = remember { ShadowViewModel() }
 
-    LazyColumn(
 
+    //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR AHACER BACKGROUNDS
+    Box(modifier = Modifier.fillMaxSize()) {
 
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color(15, 139, 237)),
+        //https://stackoverflow.com/questions/68937947/how-to-set-drawable-as-a-background-to-image-in-jetpack-compose
+        Image(
+            painter = painterResource(R.drawable.untitled),
+            contentDescription = null, // Provide a description if needed
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize()
+        )
 
-        //Estado del scroll (no se guarda al navegar con la bottomBar)
-        state = scrollState,
-        content = {
-            items(shadowsList.size) { index ->
-                val shadow = shadowsList[index]
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize(),
+            //Estado del scroll (no se guarda al navegar con la bottomBar)
+            state = scrollState,
+            content = {
+                items(shadowsList.size) { index ->
+                    val shadow = shadowsList[index]
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                        .background(Color(2, 46, 73))
-                        .clickable {
-
-
-                            shadowViewModel.shadowSelector(shadow)
-                            navController.navigate(Screen.DetailedShadow.route)
-                        }
-                ) {
-                    //Row dentro de la box principal para añadir el cuadrito de color amarillo
-                    //Esta rodea al cuadro amarillo y al texto, si quisiera añadir mas elementos a
-                    //cada nombre se añadiría aquí
-                    Row(
+                    Box(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(horizontal = 10.dp),
-                        verticalAlignment = Alignment.CenterVertically,
+                            .fillMaxWidth()
+                            .padding(8.dp)
+                            .background(Color(2, 46, 73))
+                            .clickable {
 
-                        ) {
-                        //Esta Box es el cuadrito pequeño
-                        Box(
+
+                                shadowViewModel.shadowSelector(shadow)
+                                navController.navigate(Screen.DetailedShadow.route)
+                            }
+                    ) {
+                        //Row dentro de la box principal para añadir el cuadrito de color amarillo
+                        //Esta rodea al cuadro amarillo y al texto, si quisiera añadir mas elementos a
+                        //cada nombre se añadiría aquí
+                        Row(
                             modifier = Modifier
-                                .size(16.dp)
-                                .background(Color(254, 189, 97))
-                        )
-                        Text(
-                            text = shadow.name,
-                            color = Color.White,
-                            fontSize = 16.sp,
-                            modifier = Modifier.padding(start = 8.dp, top = 16.dp, bottom = 16.dp),
-                            fontFamily = minervaFamily,
-                            fontWeight = FontWeight.Normal,
-                        )
+                                .fillMaxSize()
+                                .padding(horizontal = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+
+                            ) {
+                            //Esta Box es el cuadrito pequeño
+                            Box(
+                                modifier = Modifier
+                                    .size(16.dp)
+                                    .background(Color(254, 189, 97))
+                            )
+                            Text(
+                                text = shadow.name,
+                                color = Color.White,
+                                fontSize = 16.sp,
+                                modifier = Modifier.padding(
+                                    start = 8.dp,
+                                    top = 16.dp,
+                                    bottom = 16.dp
+                                ),
+                                fontFamily = minervaFamily,
+                                fontWeight = FontWeight.Normal,
+                            )
+                        }
                     }
                 }
             }
-        }
-    )
+        )
+    }
 }
-
 
 
 /*RequiresApi(Build.VERSION_CODES.Q)
