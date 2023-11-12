@@ -1,21 +1,19 @@
 package com.example.p3re.screens
 
 import DetailedShadowScreen
-import android.app.Application
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.p3re.data.ShadowDAO
-import com.example.p3re.data.ShadowViewModel
+import com.example.p3re.data.ViewModel
+import com.example.p3re.data.selectedSocialLink
 
 sealed class Screen(val route: String){
     object SocialLinks : Screen("social_links")
@@ -25,6 +23,8 @@ sealed class Screen(val route: String){
 
     object DetailedShadow : Screen("detailed_shadow")
 
+    object DetailedSocialLink : Screen("detailed_social_link")
+
 
 }
 //el navController es necesario para navegar entre pantallas
@@ -32,7 +32,11 @@ sealed class Screen(val route: String){
 //Parametro context para poder pasar el contexto de la main activity y por tanto de toda la app
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
-fun NavGraph(navController: NavHostController, viewModel: ShadowViewModel, context: Context) {
+fun NavGraph(
+    navController: NavHostController,
+    viewModel: ViewModel,
+    context: Context,
+) {
     NavHost(
         navController,
         startDestination = Screen.SocialLinks.route,
@@ -40,14 +44,14 @@ fun NavGraph(navController: NavHostController, viewModel: ShadowViewModel, conte
         exitTransition= { fadeOut(animationSpec = tween(0)) }) {
         composable(Screen.SocialLinks.route) {
             viewModel.updateSelectedTabName("SOCIAL LINKS")
-            SocialLinksScreen()
+            SocialLinksScreen(navController, context)
         }
         composable(Screen.Shadows.route) {
             viewModel.updateSelectedTabName("SHADOWS")
             CompendiumScreen(navController, context)
         }
         composable(Screen.FusionCalculator.route) {
-            viewModel.updateSelectedTabName("FUSION CALCULATOR")
+            viewModel.updateSelectedTabName("FUSION")
             FusionCalculatorScreen()
         }
         composable(Screen.Answers.route) {
@@ -55,9 +59,20 @@ fun NavGraph(navController: NavHostController, viewModel: ShadowViewModel, conte
             AnswersScreen()
         }
         composable(Screen.DetailedShadow.route) {
-            val shadowViewModel = remember { ShadowViewModel() }
-            shadowViewModel.shadowReturn()?.let { it1 -> DetailedShadowScreen(it1) }
-            shadowViewModel.shadowReturn()?.let { DetailedShadowScreen(it) }
+            /*DetailedShadowScreen(shadow = shadowViewModel.getShadow())*/
+            viewModel.getShadow()?.let { DetailedShadowScreen(it) }
+        }
+        composable(Screen.DetailedSocialLink.route){
+
+            //Poner el nombre del social link abajo
+            //viewModel.updateSelectedTabName(selectedSocialLink.name.split(" ")[0].uppercase())
+            selectedSocialLink?.name?.split(" ")?.get(0)?.let { it1 ->
+                viewModel.updateSelectedTabName(
+                    it1.uppercase())
+            }
+
+            //Navegar con parametro social link y viewmodel
+            viewModel.getSocialLink()?.let { it1 -> DetailedSocialLinkScreen(socialLink = it1, viewModel = viewModel) }
         }
     }
 }

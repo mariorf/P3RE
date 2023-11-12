@@ -1,5 +1,6 @@
 package com.example.p3re.data
 
+import androidx.compose.ui.graphics.Shadow
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
@@ -9,9 +10,9 @@ import androidx.room.Query
 @Dao
 interface ShadowDAO {
 
-    @Insert
+    /*Insert
     suspend fun insertAll(shadows: List<Shadow>)
 
-    @Query("SELECT * FROM shadow")
-    fun getShadows(): Shadow
+    @Query("SELECT * FROM Shadows")
+    fun getShadows(): Shadows*/
 }

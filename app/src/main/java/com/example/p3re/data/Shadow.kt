@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 //Entity = tabla
 @Entity()
 @TypeConverters(Converters::class)
-data class Shadow(
+data class Shadows(
 
     @PrimaryKey
     val id: Int = 0,

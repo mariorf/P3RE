@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt") version "1.9.20"
+    //https://github.com/Kotlin/kotlinx.serialization
+    kotlin("plugin.serialization") version "1.9.0"
 }
 
 android {
@@ -50,12 +52,17 @@ android {
     }
 }
 
+repositories {
+    google()
+
+    mavenCentral()
+}
+
 dependencies {
 
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.compose.ui:ui")
@@ -72,13 +79,31 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.10.1")
 
-    //Import de navigation compose
+
+
+
+
+    //Supabase
+    dependencies {
+        //Para implementar postgrest (para bases de datos del elefante triste)
+        implementation("io.github.jan-tennert.supabase:postgrest-kt:1.4.7")
+
+        //https://ktor.io/docs/client-dependencies.html#add-ktor-dependencies
+        implementation("io.ktor:ktor-client-cio:2.3.6")
+
+        // https://mvnrepository.com/artifact/io.github.ferhatwi/supabase-kt
+        implementation("io.github.ferhatwi:supabase-kt:0.2.5")
+    }
+
+    //Navigation compose
     dependencies {
         val nav_version = "2.7.5"
 
         implementation("androidx.navigation:navigation-compose:$nav_version")
     }
 
+
+    //room
     dependencies {
         val room_version = "2.6.0"
 
@@ -107,6 +132,19 @@ dependencies {
         implementation("androidx.room:room-paging:$room_version")
     }
 
+    //kotlin serialization
+    //https://github.com/Kotlin/kotlinx.serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
+
+    dependencies {
+        implementation("androidx.core:core-ktx:1.12.0")
+    }
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
 
 

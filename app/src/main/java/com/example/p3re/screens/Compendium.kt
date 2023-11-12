@@ -16,10 +16,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -31,16 +31,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.room.TypeConverters
 import com.example.p3re.R
-import com.example.p3re.data.Shadow
-import com.example.p3re.data.ShadowDAO
-import com.example.p3re.data.ShadowViewModel
+import com.example.p3re.data.Shadows
+import com.example.p3re.data.ViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader
-import java.io.IOException
 import java.io.InputStreamReader
-import java.nio.charset.Charset
-import java.util.concurrent.Executors
 
 
 //RECIBEN COMO PARAMETROS NAV CONTROLLERS LAS FUNCIONES A LAS QUE VAS A TENER QUE PODER NAVEGAR
@@ -60,11 +56,6 @@ val minervaFamily = FontFamily(
 @TypeConverters
 //Que es este NavHostController
 fun CompendiumScreen(navController: NavHostController, context: Context) {
-
-    //Corutine
-    /*LaunchedEffect(Unit) {
-        shadowDAO.insertAll(shadowsList)
-    }*/
 
     //Leo el archivo aqui porque necesito el contexto que me pasan como parametro
     var json: String?
@@ -95,8 +86,8 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
     json = jsonStringBuilder.toString()
 
     val gson = Gson()
-    val mapType = object : TypeToken<Map<String, Shadow>>() {}.type
-    val shadowMap: Map<String, Shadow> = gson.fromJson(json, mapType)
+    val mapType = object : TypeToken<Map<String, Shadows>>() {}.type
+    val shadowMap: Map<String, Shadows> = gson.fromJson(json, mapType)
 
     val shadowsList = shadowMap.values.toList()
 
@@ -104,7 +95,7 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
     val scrollState = rememberLazyListState()
 
     //Instancia del viewModel
-    val shadowViewModel = remember { ShadowViewModel() }
+    val viewModel = remember { ViewModel() }
 
 
     //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR AHACER BACKGROUNDS
@@ -120,9 +111,11 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
 
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(bottom = 70.dp, top = 70.dp),
             //Estado del scroll (no se guarda al navegar con la bottomBar)
             state = scrollState,
+
             content = {
                 items(shadowsList.size) { index ->
                     val shadow = shadowsList[index]
@@ -130,14 +123,16 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(8.dp)
-                            .background(Color(2, 46, 73))
+                            .padding(top = 30.dp)
+                            .background(Color(255, 255, 255, 255))
+                            .shadow(elevation = 1.dp, spotColor = Color(66, 238, 239) )
                             .clickable {
 
 
-                                shadowViewModel.shadowSelector(shadow)
+                                viewModel.setShadow(shadow)
                                 navController.navigate(Screen.DetailedShadow.route)
                             }
+
                     ) {
                         //Row dentro de la box principal para añadir el cuadrito de color amarillo
                         //Esta rodea al cuadro amarillo y al texto, si quisiera añadir mas elementos a
@@ -150,14 +145,15 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
 
                             ) {
                             //Esta Box es el cuadrito pequeño
+                            val hola:String
                             Box(
                                 modifier = Modifier
-                                    .size(16.dp)
-                                    .background(Color(254, 189, 97))
+                                    .background(Color(9, 45, 197))
+
                             )
                             Text(
-                                text = shadow.name,
-                                color = Color.White,
+                                text = shadow.name.uppercase(),
+                                color = Color(9, 45, 197),
                                 fontSize = 16.sp,
                                 modifier = Modifier.padding(
                                     start = 8.dp,
