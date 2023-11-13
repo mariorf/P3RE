@@ -28,7 +28,6 @@ sealed class Screen(val route: String){
 
     object SplashScreen : Screen("splash_screen")
 
-
 }
 //el navController es necesario para navegar entre pantallas
 //View model para poder mover datos entre pantallas

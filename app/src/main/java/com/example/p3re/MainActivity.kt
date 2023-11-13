@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -24,8 +25,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.p3re.screens.NavGraph
@@ -173,6 +176,7 @@ class MainActivity : ComponentActivity() {
                                     fontWeight = FontWeight.Normal,
                                     fontSize = 40.sp,
                                     color = Color(0, 0, 0, 255),
+                                    modifier = Modifier.padding(start = 10.dp, bottom = 4.dp),
                                 )
                         }
 
