@@ -92,8 +92,7 @@ dependencies {
         //Para implementar postgrest (para bases de datos del elefante triste)
         implementation("io.github.jan-tennert.supabase:postgrest-kt:1.4.7")
 
-        //https://ktor.io/docs/client-dependencies.html#add-ktor-dependencies
-        implementation("io.ktor:ktor-client-cio:2.3.6")
+
 
         // https://mvnrepository.com/artifact/io.github.ferhatwi/supabase-kt
         implementation("io.github.ferhatwi:supabase-kt:0.2.5")
@@ -109,6 +108,7 @@ dependencies {
 
     //room
     dependencies {
+
         val room_version = "2.6.0"
 
         implementation("androidx.room:room-runtime:$room_version")
@@ -136,6 +136,7 @@ dependencies {
         implementation("androidx.room:room-paging:$room_version")
     }
 
+
     //kotlin serialization
     //https://github.com/Kotlin/kotlinx.serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
@@ -144,6 +145,11 @@ dependencies {
     dependencies {
         implementation("androidx.core:core-ktx:1.12.0")
     }
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

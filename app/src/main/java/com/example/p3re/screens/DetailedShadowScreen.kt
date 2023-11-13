@@ -1,5 +1,6 @@
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.p3re.R
 import com.example.p3re.data.Fonts
+import com.example.p3re.data.SHHADOW
 import com.example.p3re.data.Shadows
 import com.example.p3re.data.selectedShadow
 
@@ -35,7 +37,7 @@ fun DetailedShadowScreen(shadow: Shadows) {
 
         //https://stackoverflow.com/questions/68937947/how-to-set-drawable-as-a-background-to-image-in-jetpack-compose
         Image(
-            painter = painterResource(R.drawable.untitled),
+            painter = painterResource(R.drawable.prueba1),
             contentDescription = null, // Provide a description if needed
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize()
@@ -58,12 +60,12 @@ fun DetailedShadowScreen(shadow: Shadows) {
                         .aspectRatio(1f)
                         .size(30.dp),
                 )
+                //Spacer de la tabla a la imagen principal
                 Spacer(modifier = Modifier.height(16.dp))
                 Table(contentCell)
                 rowDataShadow(label = "Name: " + shadow.name)
                 rowDataShadow(label = "Level: " + shadow.lvl.toString())
                 rowDataShadow(label = "Found in: " + shadow.area)
-                rowDataShadow(label = "Skills: " + shadow.skills)
                 rowDataShadow(label = "Gem drops: " + shadow.gem)
             }
         }
@@ -123,21 +125,21 @@ fun TableCell(valueFirstCell: String, valueSecondCell: String) {
         Box(
             modifier = Modifier
                 .size(100.dp, 40.dp)
-                .border(4.dp, Color.Black)
-                .background(Color(9, 45, 197)),
+                .border(3.dp, Color.White)
+                .background(Color.Transparent),
 
             contentAlignment = Alignment.Center
         ) {
-            Text(text = valueFirstCell, color=(Color.White), fontFamily = Fonts.summerFontFamily)
+            Text(text = valueFirstCell, color=(Color(10, 21, 70, 255)), fontFamily = Fonts.summerFontFamily)
         }
         Box(
             modifier = Modifier
                 .size(100.dp, 40.dp)
-                .border(4.dp, Color.Black)
-                .background(Color(9, 45, 197)),
+                .border(2.dp, Color.White)
+                .background(Color.Transparent),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = valueSecondCell, color=(Color.White), fontFamily = Fonts.summerFontFamily)
+            Text(text = valueSecondCell, color=(Color(10, 21, 70, 255)), fontFamily = Fonts.summerFontFamily)
         }
     }
 }
@@ -153,8 +155,8 @@ fun rowDataShadow(label: String) {
         modifier = Modifier
             .fillMaxWidth()
             //padding para que no se toquen entre los Box
-            .padding(8.dp)
-            .background(Color.White)
+            .background(Color.Transparent)
+            .border(border = BorderStroke(width = 1.dp, color = Color.White))
     ) {
         //Row dentro del contenedor Box que es la etiqueta principal para añadir el cuadrito amarillo y texto alineados en el centro
         Row(
@@ -163,15 +165,15 @@ fun rowDataShadow(label: String) {
         ) {
 
             //Caja de la izquierda
-            Box(
+            /*Box(
                 modifier = Modifier
                     .size(16.dp)
-                    .background(Color(9, 45, 197))
-            )
+                    .background(Color(10, 21, 70, 255))
+            )*/
             Text(
                 text = label.uppercase(),
-                color = Color(9, 45, 197),
-                fontSize = 16.sp,
+                color = Color(10, 21, 70, 255),
+                fontSize = 18.sp,
                 //el padding de arriba y abajo es para que sea mas gorda la row y no de tanto asco
                 modifier = Modifier.padding(start = 8.dp, top = 16.dp, bottom = 16.dp),
                 fontWeight = FontWeight.Normal,

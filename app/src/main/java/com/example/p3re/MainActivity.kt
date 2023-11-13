@@ -3,6 +3,7 @@ package com.example.p3re
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
@@ -38,7 +39,25 @@ import com.example.p3re.ui.theme.P3RETheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.p3re.data.ViewModel
 import com.example.p3re.data.Fonts
+import com.example.p3re.data.SHHADOW
+import com.example.p3re.data.ShadowApp
+import com.example.p3re.data.getShadowsFromURL
 import com.example.p3re.screens.Screen
+import com.example.p3re.utils.SupabaseUtils
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.postgrest.postgrest
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 //Clase per a crear els items de la barra de navegació inferior
@@ -50,16 +69,14 @@ data class BottomNavigationItem(
 )
 
 class MainActivity : ComponentActivity() {
-    //Para el Scaffold
-
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @RequiresApi(Build.VERSION_CODES.Q)
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             P3RETheme {
-
                 val navController = rememberNavController()
                 //Lista de items de la barra de navegació inferior
                 //Lista de items de la data class creada dalt

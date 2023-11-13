@@ -1,10 +1,15 @@
 package com.example.p3re.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
+
+@Entity
 @Serializable
 data class SHHADOW(
 
+    @PrimaryKey
     var _key: String,
     var name: String,
     val area: String,

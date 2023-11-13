@@ -18,10 +18,20 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 import androidx.lifecycle.lifecycleScope
+import com.example.p3re.data.ShadowApp
 import kotlinx.coroutines.coroutineScope
 
 
-class SupabaseUtils() {
+
+object SupabaseUtils {
+
+
+    //val app = applicationContext as ShadowApp
+
+
+    var shadowListResponse: List<SHHADOW>? = null
+
+    var shadowList: ArrayList<SHHADOW>? = null
 
 
     //https://www.youtube.com/watch?v=NWaIIRfVpuo
@@ -32,23 +42,20 @@ class SupabaseUtils() {
             supabaseUrl = "https://kcpdykkspiuyjmwvyxqa.supabase.co",
             supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtjcGR5a2tzcGl1eWptd3Z5eHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTk3MTMxMTMsImV4cCI6MjAxNTI4OTExM30.phkffCnV3l_i3KtM4VRjfeTWHz_d50JnEj1v0oCJh-g"
         ){
-            Log.d("DEBUG", "HOLA1")
             install(Postgrest)
-            Log.d("DEBUG", "HOLA2")
         }
         return client
     }
     //https://www.youtube.com/shorts/aQw_97TqTQU
-    fun getData(){
+    suspend fun getData(): List<SHHADOW>? {
 
-
-                GlobalScope.launch {
-                    Log.d("DEBUG", "HOLA1")
                     val client = getClient()
                     val supabaseResponse = client.postgrest["p3_shadows"].select()
-                    val data = supabaseResponse.decodeList<SHHADOW>()
-                    Log.d("DEBUG", "HOLA2")
-                }
+                    shadowListResponse = supabaseResponse.decodeList<SHHADOW>()
+                    for (SHHADOW in shadowListResponse!!){
+                        Log.d("ACÁ", SHHADOW.name)
+                    }
+        return shadowListResponse
     }
 }
 

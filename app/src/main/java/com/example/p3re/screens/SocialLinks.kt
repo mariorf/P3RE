@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -107,6 +108,7 @@ fun SocialLinksScreen(navController: NavHostController, context: Context) {
                             .aspectRatio(0.75f) // Maintain aspect ratio
                             .padding(8.dp)
                             .background(Color.White)
+                            //.border(2.dp, color = Color(10, 21, 70, 255))
                             .clickable {
 
                                 viewModel.setSocialLink(socialLink)

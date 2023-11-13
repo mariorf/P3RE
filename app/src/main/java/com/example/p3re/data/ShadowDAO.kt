@@ -10,9 +10,13 @@ import androidx.room.Query
 @Dao
 interface ShadowDAO {
 
-    /*Insert
-    suspend fun insertAll(shadows: List<Shadow>)
+    @Query("SELECT * FROM SHHADOW")
+    fun getAll(): List<SHHADOW>
 
-    @Query("SELECT * FROM Shadows")
-    fun getShadows(): Shadows*/
+    @Query("SELECT * FROM SHHADOW WHERE name = :name")
+    fun getByName(name: String): SHHADOW
+
+    @Insert
+    fun insertShadow(shadow:SHHADOW)
+
 }

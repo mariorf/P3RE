@@ -41,7 +41,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController,
-        startDestination = Screen.SocialLinks.route,
+        startDestination = Screen.Shadows.route,
         enterTransition = { fadeIn(animationSpec = tween(0)) },
         exitTransition= { fadeOut(animationSpec = tween(0)) }) {
 
@@ -63,7 +63,7 @@ fun NavGraph(
         }
         composable(Screen.DetailedShadow.route) {
             /*DetailedShadowScreen(shadow = shadowViewModel.getShadow())*/
-            viewModel.getShadow()?.let { DetailedShadowScreen(it) }
+            viewModel.getShadow()?.let { it1 -> DetailedShadowScreen(shadow = it1) }
         }
         composable(Screen.DetailedSocialLink.route){
             //Poner el nombre del social link abajo

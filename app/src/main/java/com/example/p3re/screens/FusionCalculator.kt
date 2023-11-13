@@ -27,7 +27,7 @@ fun FusionCalculatorScreen() {
     Box(modifier = Modifier.fillMaxSize()) {
         //https://stackoverflow.com/questions/68937947/how-to-set-drawable-as-a-background-to-image-in-jetpack-compose
         Image(
-            painter = painterResource(R.drawable.untitled),
+            painter = painterResource(R.drawable.prueba1),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
             //

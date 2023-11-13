@@ -3,7 +3,6 @@ package com.example.p3re.data
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
@@ -18,7 +17,7 @@ val _selectedTabName = mutableStateOf("SHADOWS")
 var selectedSocialLink by mutableStateOf<SocialLink?>(null)
 
 
-class ViewModel() : ViewModel() {
+open class ViewModel() : ViewModel() {
 
     fun setShadow(shadow: Shadows) {
 
@@ -46,7 +45,7 @@ class ViewModel() : ViewModel() {
         _selectedTabName.value = updatedName
     }
 
-    var topBarTextColor by  mutableStateOf(Color(9, 45, 197))
+    var topBarTextColor by  mutableStateOf(Color(10, 21, 70, 255))
     fun updateTopBarTextColor(updatedColor: Color){
         topBarTextColor = updatedColor
     }

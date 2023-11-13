@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
@@ -23,10 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,8 +34,13 @@ import com.example.p3re.R
 import com.example.p3re.data.Fonts
 import com.example.p3re.data.Shadows
 import com.example.p3re.data.ViewModel
+import com.example.p3re.utils.SupabaseUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import io.github.ferhatwi.supabase.Supabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -52,6 +55,8 @@ import java.io.InputStreamReader
 @TypeConverters
 //Que es este NavHostController
 fun CompendiumScreen(navController: NavHostController, context: Context) {
+
+
 
     //Leo el archivo aqui porque necesito el contexto que me pasan como parametro
     var json: String?
@@ -121,14 +126,15 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
                             .fillMaxWidth()
                             //.padding(top = 30.dp)
                             .background(Color.Transparent)
-                            .shadow(elevation = 1.dp, spotColor = Color(66, 238, 239) )
-                            .border(border = BorderStroke(width = 1.dp, color = Color.White))
+                            .shadow(elevation = 1.dp, spotColor = Color(66, 238, 239))
+                            .border(border = BorderStroke(width = 1.dp, color = Color.White), shape = RectangleShape)
                             .clickable {
 
 
                                 viewModel.setShadow(shadow)
                                 navController.navigate(Screen.DetailedShadow.route)
-                            }
+                            },
+
 
                     ) {
                         //Row dentro de la box principal para añadir el cuadrito de color amarillo
@@ -150,11 +156,11 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
                             Text(
                                 text = shadow.name.uppercase(),
                                 color = Color(10, 21, 70, 255),
-                                fontSize = 16.sp,
+                                fontSize = 18.sp,
                                 modifier = Modifier.padding(
                                     start = 8.dp,
-                                    top = 16.dp,
-                                    bottom = 16.dp
+                                    top = 26.dp,
+                                    bottom = 26.dp
                                 ),
                                 fontFamily = Fonts.summerFontFamily,
                                 fontWeight = FontWeight.Normal,
