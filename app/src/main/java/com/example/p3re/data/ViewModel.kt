@@ -39,14 +39,14 @@ class ViewModel() : ViewModel() {
     }
 
     //State basicament es un estat o valor que Compose pot vore en tot moment
-//Se cambia el valor segons _selectedTabName, que se actualitza on vuigues amb el metode de baix
+    //Se cambia el valor segons _selectedTabName, que se actualitza on vuigues amb el metode de baix
     val selectedTabName: State<String> = _selectedTabName
 
     fun updateSelectedTabName(updatedName: String) {
         _selectedTabName.value = updatedName
     }
 
-    var topBarTextColor by  mutableStateOf(Color(66, 238, 239))
+    var topBarTextColor by  mutableStateOf(Color(21, 194, 252, 255))
     fun updateTopBarTextColor(updatedColor: Color){
         topBarTextColor = updatedColor
     }

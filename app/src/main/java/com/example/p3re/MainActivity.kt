@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
                         title = "S.Links",
                         //PLACEHOLDER DEL ICONO
                         selectedIcon = Icons.Filled.Home,
-                        unselectedIcon = Icons.Outlined.Home,
+                        unselectedIcon =Icons.Outlined.Home ,
                     ),
                     BottomNavigationItem(
                         title = "Shadows",
@@ -109,9 +109,6 @@ class MainActivity : ComponentActivity() {
                     //Necesita el numero de tabs
                     itemsNavigationBar.size
                 }
-
-
-
 
                     Scaffold(
                         //TOP BAR

@@ -24,7 +24,6 @@ import kotlinx.coroutines.coroutineScope
 class SupabaseUtils() {
 
 
-
     //https://www.youtube.com/watch?v=NWaIIRfVpuo
     fun getClient() : SupabaseClient{
 

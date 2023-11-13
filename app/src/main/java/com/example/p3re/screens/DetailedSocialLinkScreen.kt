@@ -1,9 +1,11 @@
 package com.example.p3re.screens
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.VectorDrawable
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,21 +37,36 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.p3re.R
 import com.example.p3re.data.SocialLink
 import com.example.p3re.data.SocialLinkBackgroundList
+import com.example.p3re.data.SocialLinkSecondaryColorsList
 import com.example.p3re.data.SocialLinksImageList
 import com.example.p3re.data.ViewModel
 
+@SuppressLint("SuspiciousIndentation")
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun DetailedSocialLinkScreen(socialLink: SocialLink, viewModel: ViewModel) {
 
 
+    //Cargar fondo del personaje
     val backgroundImageList = SocialLinkBackgroundList.loadImages()
 
     val drawableId = backgroundImageList.find { it.second == socialLink.name }?.first ?: R.drawable.untitled
 
+
+    //cargar imagen del personaje
     val socialLinkImageList = SocialLinksImageList.loadImages()
 
     val characterImageId = socialLinkImageList.find { it.second == socialLink.name }?.first ?: R.drawable.untitled
+
+
+    //Cambiar color letras topBar
+    val secondaryColorsList = SocialLinkSecondaryColorsList.loadColors()
+
+    val secondaryColor = secondaryColorsList.find { it.second == socialLink.name }
+
+    if (secondaryColor != null) {
+        viewModel.updateTopBarTextColor(secondaryColor.first)
+    }
 
         Box(modifier = Modifier.fillMaxSize()) {
         Image(

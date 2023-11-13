@@ -9,6 +9,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -44,6 +45,7 @@ fun NavGraph(
         startDestination = Screen.SocialLinks.route,
         enterTransition = { fadeIn(animationSpec = tween(0)) },
         exitTransition= { fadeOut(animationSpec = tween(0)) }) {
+
         composable(Screen.SocialLinks.route) {
             viewModel.updateSelectedTabName("SOCIAL LINKS")
             SocialLinksScreen(navController, context)
@@ -65,7 +67,6 @@ fun NavGraph(
             viewModel.getShadow()?.let { DetailedShadowScreen(it) }
         }
         composable(Screen.DetailedSocialLink.route){
-
             //Poner el nombre del social link abajo
             //viewModel.updateSelectedTabName(selectedSocialLink.name.split(" ")[0].uppercase())
             selectedSocialLink?.name?.split(" ")?.get(0)?.let { it1 ->
