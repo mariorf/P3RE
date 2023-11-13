@@ -6,7 +6,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
@@ -63,27 +65,27 @@ class MainActivity : ComponentActivity() {
                 //Lista de items de la data class creada dalt
                 val itemsNavigationBar = listOf(
                     BottomNavigationItem(
-                        title = "S.Links",
+                        title = "S.LINKS",
                         //PLACEHOLDER DEL ICONO
                         selectedIcon = Icons.Filled.Home,
                         unselectedIcon =Icons.Outlined.Home ,
                     ),
                     BottomNavigationItem(
-                        title = "Shadows",
+                        title = "SHADOWS",
                         //PLACEHOLDER DEL ICONO
                         selectedIcon = Icons.Filled.AccountCircle,
                         unselectedIcon = Icons.Outlined.AccountCircle,
                     ),
 
                     BottomNavigationItem(
-                        title = "Fusion",
+                        title = "FUSION",
                         //PLACEHOLDER DEL ICONO
                         selectedIcon = Icons.Filled.Add,
                         unselectedIcon = Icons.Outlined.Add,
                     ),
 
                     BottomNavigationItem(
-                        title = "Answers",
+                        title = "ANSWERS",
                         //PLACEHOLDER DEL ICONO
                         selectedIcon = Icons.Filled.Create,
                         unselectedIcon = Icons.Outlined.Create,
@@ -97,11 +99,6 @@ class MainActivity : ComponentActivity() {
                 var selectedItemIndex by rememberSaveable {
                     //El index per defecte será el primer (0)
                     mutableStateOf(0)
-                }
-
-                var pagerState = rememberPagerState {
-                    //Necesita el numero de tabs
-                    itemsNavigationBar.size
                 }
 
                     Scaffold(
@@ -121,7 +118,7 @@ class MainActivity : ComponentActivity() {
                                         //Nom del item per al menú (bottom)
                                         label = {
                                             Text(
-                                                text = itemsNavigationBar.title.uppercase(),
+                                                text = itemsNavigationBar.title,
                                                 color = viewModel.topBarTextColor,
                                                 fontFamily = Fonts.summerFontFamily,
                                                 fontWeight = FontWeight.Normal
@@ -135,16 +132,16 @@ class MainActivity : ComponentActivity() {
 
                                             //Si el nom del item on click coincideix en alguna de les opcions crida al nav controler y navega hasta ella
                                             when (itemsNavigationBar.title) {
-                                                "S.Links" -> {
+                                                "S.LINKS" -> {
                                                     navController.navigate(Screen.SocialLinks.route)
                                                 }
-                                                "Shadows" -> {
+                                                "SHADOWS" -> {
                                                     navController.navigate(Screen.Shadows.route)
                                                 }
-                                                "Fusion" -> {
+                                                "FUSION" -> {
                                                     navController.navigate(Screen.FusionCalculator.route)
                                                 }
-                                                "Answers" -> {
+                                                "ANSWERS" -> {
                                                     navController.navigate(Screen.Answers.route)
                                                 }
                                             }
@@ -176,7 +173,7 @@ class MainActivity : ComponentActivity() {
                                     fontWeight = FontWeight.Normal,
                                     fontSize = 40.sp,
                                     color = Color(0, 0, 0, 255),
-                                    modifier = Modifier.padding(start = 10.dp, bottom = 4.dp),
+                                    modifier = Modifier.padding(start = 10.dp, bottom = 4.dp)
                                 )
                         }
 

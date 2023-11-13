@@ -46,7 +46,7 @@ class ViewModel() : ViewModel() {
         _selectedTabName.value = updatedName
     }
 
-    var topBarTextColor by  mutableStateOf(Color(21, 194, 252, 255))
+    var topBarTextColor by  mutableStateOf(Color(9, 45, 197))
     fun updateTopBarTextColor(updatedColor: Color){
         topBarTextColor = updatedColor
     }

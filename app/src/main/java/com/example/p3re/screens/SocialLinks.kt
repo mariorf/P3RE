@@ -82,7 +82,7 @@ fun SocialLinksScreen(navController: NavHostController, context: Context) {
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
-            painter = painterResource(R.drawable.untitled),
+            painter = painterResource(R.drawable.prueba1),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
         )

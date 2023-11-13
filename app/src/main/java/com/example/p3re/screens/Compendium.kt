@@ -3,8 +3,10 @@ package com.example.p3re.screens
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -92,12 +94,12 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
     val viewModel = remember { ViewModel() }
 
 
-    //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR AHACER BACKGROUNDS
+    //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR HACER BACKGROUNDS
     Box(modifier = Modifier.fillMaxSize()) {
 
         //https://stackoverflow.com/questions/68937947/how-to-set-drawable-as-a-background-to-image-in-jetpack-compose
         Image(
-            painter = painterResource(R.drawable.untitled),
+            painter = painterResource(R.drawable.prueba1),
             contentDescription = null, // Provide a description if needed
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize()
@@ -117,9 +119,10 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 30.dp)
-                            .background(Color(255, 255, 255, 255))
+                            //.padding(top = 30.dp)
+                            .background(Color.Transparent)
                             .shadow(elevation = 1.dp, spotColor = Color(66, 238, 239) )
+                            .border(border = BorderStroke(width = 1.dp, color = Color.White))
                             .clickable {
 
 
@@ -139,14 +142,14 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
 
                             ) {
                             //Esta Box es el cuadrito pequeño
-                            Box(
+                            /*Box(
                                 modifier = Modifier
                                     .background(Color(9, 45, 197))
-
-                            )
+                                    .size(16.dp)
+                            )*/
                             Text(
                                 text = shadow.name.uppercase(),
-                                color = Color(9, 45, 197),
+                                color = Color(10, 21, 70, 255),
                                 fontSize = 16.sp,
                                 modifier = Modifier.padding(
                                     start = 8.dp,

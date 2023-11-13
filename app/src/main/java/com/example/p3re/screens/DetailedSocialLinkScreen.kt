@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.p3re.R
+import com.example.p3re.data.Fonts
 import com.example.p3re.data.SocialLink
 import com.example.p3re.data.SocialLinkBackgroundList
 import com.example.p3re.data.SocialLinkSecondaryColorsList
@@ -114,6 +115,7 @@ fun DetailedSocialLinkScreen(socialLink: SocialLink, viewModel: ViewModel) {
                         Text(
                             text = conversation+" "+index,
                             fontWeight = FontWeight.Bold,
+                            fontFamily = Fonts.summerFontFamily,
                             fontSize = 18.sp
                         )
                     }
