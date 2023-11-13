@@ -23,9 +23,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.p3re.R
+import com.example.p3re.data.Fonts
 import com.example.p3re.data.Shadows
 import com.example.p3re.data.selectedShadow
-import com.example.p3re.screens.minervaFamily
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
@@ -128,7 +128,7 @@ fun TableCell(valueFirstCell: String, valueSecondCell: String) {
 
             contentAlignment = Alignment.Center
         ) {
-            Text(text = valueFirstCell, color=(Color.White), fontFamily = minervaFamily)
+            Text(text = valueFirstCell, color=(Color.White), fontFamily = Fonts.summerFontFamily)
         }
         Box(
             modifier = Modifier
@@ -137,7 +137,7 @@ fun TableCell(valueFirstCell: String, valueSecondCell: String) {
                 .background(Color(9, 45, 197)),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = valueSecondCell, color=(Color.White), fontFamily = minervaFamily)
+            Text(text = valueSecondCell, color=(Color.White), fontFamily = Fonts.summerFontFamily)
         }
     }
 }
@@ -175,7 +175,7 @@ fun rowDataShadow(label: String) {
                 //el padding de arriba y abajo es para que sea mas gorda la row y no de tanto asco
                 modifier = Modifier.padding(start = 8.dp, top = 16.dp, bottom = 16.dp),
                 fontWeight = FontWeight.Normal,
-                fontFamily = minervaFamily,
+                fontFamily = Fonts.summerFontFamily,
             )
         }
     }

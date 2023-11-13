@@ -3,7 +3,6 @@ package com.example.p3re
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
@@ -32,17 +31,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.p3re.screens.NavGraph
 import com.example.p3re.ui.theme.P3RETheme
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.p3re.data.Api
-import com.example.p3re.data.SHHADOW
 import com.example.p3re.data.ViewModel
+import com.example.p3re.data.Fonts
 import com.example.p3re.screens.Screen
-import com.example.p3re.screens.minervaFamily
-import com.example.p3re.utils.ShadowsAPI
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 //Clase per a crear els items de la barra de navegació inferior
@@ -129,7 +120,7 @@ class MainActivity : ComponentActivity() {
                                             Text(
                                                 text = itemsNavigationBar.title.uppercase(),
                                                 color = viewModel.topBarTextColor,
-                                                fontFamily = minervaFamily,
+                                                fontFamily = Fonts.summerFontFamily,
                                                 fontWeight = FontWeight.Normal
                                             )
 
@@ -175,9 +166,10 @@ class MainActivity : ComponentActivity() {
                             }
                         },
                         bottomBar = {
+
                                 Text(
                                     text = viewModel.selectedTabName.value,
-                                    fontFamily = minervaFamily,
+                                    fontFamily = Fonts.summerFontFamily,
                                     fontWeight = FontWeight.Normal,
                                     fontSize = 40.sp,
                                     color = Color(0, 0, 0, 255),

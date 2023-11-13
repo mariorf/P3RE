@@ -35,7 +35,7 @@ fun AnswersScreen() {
         ) {
             Image(
                 painter = painterResource(R.drawable.work_in_progress),
-                contentDescription = "",
+                contentDescription = null,
                 modifier = Modifier.fillMaxWidth()
             )
         }

@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.room.TypeConverters
 import com.example.p3re.R
+import com.example.p3re.data.Fonts
 import com.example.p3re.data.Shadows
 import com.example.p3re.data.ViewModel
 import com.google.gson.Gson
@@ -42,14 +43,7 @@ import java.io.InputStreamReader
 //RECIBEN COMO PARAMETROS NAV CONTROLLERS LAS FUNCIONES A LAS QUE VAS A TENER QUE PODER NAVEGAR
 
 //https://developer.android.com/jetpack/compose/text/fonts
-@RequiresApi(Build.VERSION_CODES.Q)
-val minervaFamily = FontFamily(
-    Font(R.font.minerva_modern_black),
-    Font(R.font.minerva_modern_bold_italic),
-    Font(R.font.minerva_modern_bold),
-    Font(R.font.minerva_modern_italic),
-    Font(R.font.minerva_modern_bold_italic)
-)
+
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
@@ -159,7 +153,7 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
                                     top = 16.dp,
                                     bottom = 16.dp
                                 ),
-                                fontFamily = minervaFamily,
+                                fontFamily = Fonts.summerFontFamily,
                                 fontWeight = FontWeight.Normal,
                             )
                         }
