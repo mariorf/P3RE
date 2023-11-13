@@ -1,20 +1,13 @@
 package com.example.p3re
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -32,19 +25,24 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.example.p3re.screens.NavGraph
 import com.example.p3re.ui.theme.P3RETheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.p3re.data.Api
+import com.example.p3re.data.SHHADOW
 import com.example.p3re.data.ViewModel
 import com.example.p3re.screens.Screen
 import com.example.p3re.screens.minervaFamily
+import com.example.p3re.utils.ShadowsAPI
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 //Clase per a crear els items de la barra de navegació inferior
@@ -65,8 +63,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             P3RETheme {
-
-                val context: Context = applicationContext
 
                 val navController = rememberNavController()
                 //Lista de items de la barra de navegació inferior

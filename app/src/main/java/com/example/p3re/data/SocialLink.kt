@@ -1,7 +1,5 @@
 package com.example.p3re.data
 
-import androidx.compose.ui.graphics.Color
-
 data class SocialLink(
     val name: String,
     val conversation1: String,
@@ -15,3 +13,5 @@ data class SocialLink(
     val conversation9: String,
     val conversation10: String
 )
+
+

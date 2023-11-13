@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -111,6 +112,7 @@ fun SocialLinksScreen(navController: NavHostController, context: Context) {
                                 viewModel.setSocialLink(socialLink)
                                 navController.navigate(Screen.DetailedSocialLink.route)
                             }
+
                     )
                 }
             }

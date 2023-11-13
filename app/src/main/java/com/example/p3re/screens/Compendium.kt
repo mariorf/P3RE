@@ -145,7 +145,6 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
 
                             ) {
                             //Esta Box es el cuadrito pequeño
-                            val hola:String
                             Box(
                                 modifier = Modifier
                                     .background(Color(9, 45, 197))

@@ -25,6 +25,8 @@ sealed class Screen(val route: String){
 
     object DetailedSocialLink : Screen("detailed_social_link")
 
+    object SplashScreen : Screen("splash_screen")
+
 
 }
 //el navController es necesario para navegar entre pantallas

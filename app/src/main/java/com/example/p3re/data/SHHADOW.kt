@@ -21,7 +21,8 @@ data class SHHADOW(
     val stats5: Int,
     val stats6: Int
 
-)
+){
+}
 
 
 

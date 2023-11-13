@@ -80,7 +80,11 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
 
 
+// https://mvnrepository.com/artifact/com.google.dagger/hilt-android
+    runtimeOnly("com.google.dagger:hilt-android:2.48.1")
 
+// https://mvnrepository.com/artifact/javax.inject/javax.inject
+    implementation("javax.inject:javax.inject:1")
 
 
     //Supabase
