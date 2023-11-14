@@ -48,7 +48,7 @@ fun DetailedShadowScreen(shadow: Shadows) {
                 .fillMaxSize()
                 .padding(bottom = 70.dp, top = 70.dp),
             //por algun motivo pinta sobre toda la pantalla, no solo en el content del scaffold de la main activty, asi que tengo que poner paddings en top y bottom
-            contentPadding = (PaddingValues(bottom = 100.dp, top = 100.dp))
+            contentPadding = (PaddingValues(top = 20.dp))
         ) {
             //No añade items 1 a 1 como en CompendiumScreen, añade un solo item grande para que pueda usar una LazyColumn y desplazarlo todo, basicamente
             item {
@@ -75,16 +75,7 @@ fun DetailedShadowScreen(shadow: Shadows) {
 
 
 val contentCell = listOf(
-    "Slash",
-    "Strike",
-    "Pierce",
-    "Fire",
-    "Ice",
-    "Elec",
-    "Wind",
-    "Light",
-    "Dark",
-    "Almi"
+    "Slash", "Strike", "Pierce", "Fire", "Ice", "Elec", "Wind", "Light", "Dark", "Almi"
 )
 
 
@@ -194,7 +185,7 @@ fun changeCharToText(inputString: String):String{
         return "Resists"
     }
     if(inputString=="d"){
-        return "Deflects"
+        return "Deflect"
     }
     if(inputString=="d"){
         return "Null"

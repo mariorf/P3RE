@@ -16,16 +16,19 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -51,17 +54,19 @@ fun DetailedSocialLinkScreen(socialLink: SocialLink, viewModel: ViewModel) {
     //Cargar fondo del personaje
     val backgroundImageList = SocialLinkBackgroundList.loadImages()
 
-    val drawableId = backgroundImageList.find { it.second == socialLink.name }?.first ?: R.drawable.untitled
+    val drawableId =
+        backgroundImageList.find { it.second == socialLink.name }?.first ?: R.drawable.untitled
 
 
     //cargar imagen del personaje
     val socialLinkImageList = SocialLinksImageList.loadImages()
 
-    val characterImageId = socialLinkImageList.find { it.second == socialLink.name }?.first ?: R.drawable.untitled
+    val characterImageId =
+        socialLinkImageList.find { it.second == socialLink.name }?.first ?: R.drawable.untitled
 
 
     //Cambiar color letras topBar
-    val secondaryColorsList = SocialLinkSecondaryColorsList.loadColors()
+    val secondaryColorsList = SocialLinkSecondaryColorsList.secondayColorsList()
 
     val secondaryColor = secondaryColorsList.find { it.second == socialLink.name }
 
@@ -69,57 +74,84 @@ fun DetailedSocialLinkScreen(socialLink: SocialLink, viewModel: ViewModel) {
         viewModel.updateTopBarTextColor(secondaryColor.first)
     }
 
-        Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(drawableId),
-            contentDescription = null,
-            contentScale = ContentScale.FillBounds,
-        )
+            Box(modifier = Modifier.fillMaxSize()) {
 
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 70.dp, top = 70.dp),
-                contentPadding = PaddingValues(bottom = 100.dp, top = 100.dp)
-            ) {
-                item {
-                    Image(
-                        painter = painterResource(characterImageId),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(400.dp)
-                            .fillMaxWidth()
+                //FONDO
+                Image(
+                    painter = painterResource(drawableId),
+                    contentDescription = null,
+                    contentScale = ContentScale.FillBounds,
+                )
 
-                    )
-                }
-                items(10) { index ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        val conversation = when (index) {
-                            0 -> socialLink.conversation1
-                            1 -> socialLink.conversation2
-                            2 -> socialLink.conversation3
-                            3 -> socialLink.conversation4
-                            4 -> socialLink.conversation5
-                            5 -> socialLink.conversation6
-                            6 -> socialLink.conversation7
-                            7 -> socialLink.conversation8
-                            8 -> socialLink.conversation9
-                            9 -> socialLink.conversation10
-                            else -> ""
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = 70.dp, top = 70.dp),
+                    contentPadding = PaddingValues(top = 20.dp)
+                ) {
+                    item {
+                        if (secondaryColor != null) {
+                            Row(
+                                modifier = Modifier
+                                    .height(150.dp)
+                                    .fillMaxSize()
+                                    .background(secondaryColor.first)
+                                    .shadow(10.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                ) {
+                                    Image(
+                                        painter = painterResource(characterImageId),
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .fillMaxHeight()
+                                            .align(Alignment.Center)
+                                    )
+                                }
+
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .fillMaxHeight()
+                                ) {
+
+                                    Column(
+                                        Modifier
+                                            .fillMaxSize()
+                                    ) {
+                                        Column(
+                                            Modifier
+                                                .fillMaxSize()
+                                                .background(secondaryColor.first)
+                                        ) {
+                                            Column(Modifier.padding(8.dp)) {
+                                                Text(
+                                                    text = socialLink.name,
+                                                    fontFamily = Fonts.summerFontFamily,
+                                                    fontSize = 26.sp
+                                                )
+                                                Text(
+                                                    text = socialLink.arcana,
+                                                    fontFamily = Fonts.summerFontFamily,
+                                                    fontSize = 12.sp,
+                                                    color = Color.Black
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        Text(
-                            text = conversation+" "+index,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = Fonts.summerFontFamily,
-                            fontSize = 18.sp
-                        )
+                    }
+
+                    items(10) { index ->
+                        if (secondaryColor != null) {
+                            ExpandableCard("Rank " + index, "Contenidoooooooooooooooooooooooooooooooooooooooooooooooo"+ index, secondaryColor.first)
+                        }
                     }
                 }
             }
         }
-}
+

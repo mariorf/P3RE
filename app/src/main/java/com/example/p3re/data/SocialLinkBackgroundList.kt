@@ -16,7 +16,7 @@ object SocialLinkBackgroundList {
             R.drawable.ken_bg to "Ken Amada",
             R.drawable.shinjiro_bg to "Shinjiro",
             R.drawable.kenji_bg to "Kenji",
-            R.drawable.yuko_bg to "Yuka",
+            R.drawable.yuko_bg to "Yuko",
             R.drawable.kazushi_bg to "Kazushi",
             R.drawable.keisuke_bg to "Keisuke",
             R.drawable.chihiro_bg to "Chihiro",

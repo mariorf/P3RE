@@ -2,6 +2,7 @@ package com.example.p3re.data
 
 data class SocialLink(
     val name: String,
+    val arcana: String,
     val conversation1: String,
     val conversation2: String,
     val conversation3: String,

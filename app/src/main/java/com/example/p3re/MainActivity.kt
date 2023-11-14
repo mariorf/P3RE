@@ -38,13 +38,17 @@ import androidx.navigation.compose.rememberNavController
 import com.example.p3re.screens.NavGraph
 import com.example.p3re.ui.theme.P3RETheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.p3re.data.CharacterData
 import com.example.p3re.data.ViewModel
 import com.example.p3re.data.Fonts
 import com.example.p3re.data.SHHADOW
 import com.example.p3re.data.ShadowApp
+import com.example.p3re.data.SocialLink
 import com.example.p3re.data.getShadowsFromURL
 import com.example.p3re.screens.Screen
 import com.example.p3re.utils.SupabaseUtils
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
@@ -59,6 +63,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 
 //Clase per a crear els items de la barra de navegació inferior

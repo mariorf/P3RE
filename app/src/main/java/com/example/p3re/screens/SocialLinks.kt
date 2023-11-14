@@ -5,7 +5,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -14,11 +13,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -29,6 +26,7 @@ import com.example.p3re.data.Shadows
 import com.example.p3re.data.SocialLink
 import com.example.p3re.data.SocialLinksImageList
 import com.example.p3re.data.ViewModel
+import com.example.p3re.screens.Screen
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader
@@ -74,9 +72,10 @@ fun SocialLinksScreen(navController: NavHostController, context: Context) {
 
     val gson = Gson()
     val mapType = object : TypeToken<Map<String, SocialLink>>() {}.type
-    val SocialLinkMap: Map<String, SocialLink> = gson.fromJson(json, mapType)
+    val socialLinksMap: Map<String, SocialLink> = gson.fromJson(json, mapType)
 
-    val socialLinksList = SocialLinkMap.values.toList()
+    val socialLinksList = socialLinksMap.values.toList()
+
 
     //Recordar el estado del scroll
     val scrollState = rememberLazyGridState()

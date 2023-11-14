@@ -19,7 +19,7 @@ object SocialLinksImageList {
             R.drawable.ken to "Ken Amada",
             R.drawable.shinjiro to "Shinjiro",
             R.drawable.kenji to "Kenji",
-            R.drawable.yuko to "Yuka",
+            R.drawable.yuko to "Yuko",
             R.drawable.kazushi to "Kazushi",
             R.drawable.keisuke to "Keisuke",
             R.drawable.chihiro to "Chihiro",
