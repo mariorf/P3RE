@@ -97,21 +97,10 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
 
     val shadowsList = shadowMap.values.toList()
 
+    //Esto debería hacerse en el view model
     val scrollState = rememberLazyListState()
 
     val viewModel: ViewModel = viewModel()
-
-    val dataList by viewModel.getDataList2().collectAsStateWithLifecycle()
-
-    if(dataList.isEmpty()){
-        Log.d("EMPTYLIST", "EMPTY")
-    }else{
-        Log.d("FULL", "FULL")
-    }
-
-    dataList.forEach { shadow ->
-       Log.d("dataListForEach", shadow.name)
-    }
 
     //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR HACER BACKGROUNDS
     Box(modifier = Modifier.fillMaxSize()) {
@@ -141,7 +130,7 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
                             //.padding(top = 30.dp)
                             .background(Color.Transparent)
                             .border(
-                                border = BorderStroke(width = 1.dp, color = Color.White),
+                                border = BorderStroke(width = 1.dp, color = Color.Black),
                                 shape = RectangleShape
                             )
                             .clickable {

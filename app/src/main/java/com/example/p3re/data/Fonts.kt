@@ -26,4 +26,9 @@ object Fonts {
 
         Font(R.font.san_marino_beach)
     )
+
+    val neulisFamily = FontFamily(
+
+        Font(R.font.neulis_semi_bold)
+    )
 }

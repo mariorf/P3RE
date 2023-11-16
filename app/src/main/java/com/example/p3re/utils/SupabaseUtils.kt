@@ -16,9 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-
 import androidx.lifecycle.lifecycleScope
-import com.example.p3re.data.ShadowApp
 import kotlinx.coroutines.coroutineScope
 
 
@@ -26,13 +24,7 @@ import kotlinx.coroutines.coroutineScope
 object SupabaseUtils {
 
 
-    //val app = applicationContext as ShadowApp
-
-
     var shadowListResponse: List<SHHADOW>? = null
-
-    var shadowList: ArrayList<SHHADOW>? = null
-
 
     //https://www.youtube.com/watch?v=NWaIIRfVpuo
     fun getClient() : SupabaseClient{

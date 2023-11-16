@@ -44,9 +44,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.p3re.data.ViewModel
 import com.example.p3re.data.Fonts
 import com.example.p3re.data.SHHADOW
-import com.example.p3re.data.ShadowApp
 import com.example.p3re.data.SocialLink
-import com.example.p3re.data.getShadowsFromURL
 import com.example.p3re.data.selectedShadow
 import com.example.p3re.screens.Screen
 import com.example.p3re.utils.SupabaseUtils

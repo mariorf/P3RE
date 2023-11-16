@@ -1,314 +1,267 @@
 {
-  "April classroom answers": [
-    {
-      "Date": "4/8",
-      "Question": "Who did I say was my favorite author?",
-      "Answer": "Utsobu Kubota"
-    },
-    {
-      "Date": "4/20",
+  "4/8": {
+    "date": "4/8",
+    "Question": "Who did I say was my favorite author?",
+    "Answer": "Utsobu Kubota"
+  },
+  "4/20": {
+      "date": "4/20",
       "Question": "What was the style of houses in the Jomson period called?",
       "Answer": "Mud huts"
-    },
-    {
-      "Date": "4/27",
+  },
+  "4/27": {
+      "date": "4/27",
       "Question": "Do you know when numbers were invented?",
-      "Answer": "6,000 years ago. A teacher in Persona 3 says, 'You got it! The Sumerians invented numbers 6,000 years ago.'"
-    }
-  ],
-  "May classroom answers": [
-    {
-      "Date": "5/6",
+      "Answer": "6,000 years ago."
+  },
+  "5/6": {
+      "date": "5/6",
       "Question": "What do you call water without much calcium and magnesium?",
       "Answer": "Soft water."
-    },
-    {
-      "Date": "5/13",
+  },
+  "5/13": {
+      "date": "5/13",
       "Question": "How fast would you say the Earth rotates near the equator?",
       "Answer": "1,700 km/ph"
-    },
-    {
-      "Date": "5/15",
-      "Question": "One of the items on the menu for the family is 'pan.' How would you translate this to English?",
+  },
+  "5/15": {
+      "date": "5/15",
+      "Question": "One of the items on the menu for the family is “pan.” How would you translate this to English?",
       "Answer": "Bread"
-    },
-    {
-      "Date": "5/19",
-      "Question": "How would you translate 'pan' in English?",
+  },
+  "5/19": {
+      "date": "5/19",
+      "Question": "How would you translate “pan” in English?",
       "Answer": "Bread"
-    },
-    {
-      "Date": "5/20",
+  },
+  "5/20": {
+      "date": "5/20",
       "Question": "How fast does the Earth rotate near the equator?",
       "Answer": "Faster than sound."
-    },
-    {
-      "Date": "5/21",
+  },
+  "5/21": {
+      "date": "5/21",
       "Question": "What’s the name for water high in calcium and magnesium?",
       "Answer": "Hard water"
-    },
-    {
-      "Date": "5/22",
+  },
+  "5/22": {
+      "date": "5/22",
       "Question": "Where is the Kitora Tomb located?",
       "Answer": "Nara"
-    }
-  ],
-  "May Mid-term exams": [
-    {
-      "Date": "5/19",
-      "Question": "How would you translate 'pan' in English?",
-      "Answer": "Bread"
-    },
-    {
-      "Date": "5/20",
-      "Question": "How fast does the Earth rotate near the equator?",
-      "Answer": "Faster than sound."
-    },
-    {
-      "Date": "5/21",
-      "Question": "What’s the name for water high in calcium and magnesium?",
-      "Answer": "Hard water"
-    },
-    {
-      "Date": "5/22",
-      "Question": "Where is the Kitora Tomb located?",
-      "Answer": "Nara"
-    }
-  ],
-  "June classroom answers": [
-    {
-      "Date": "6/15",
-      "Question": "Fill in the blank with the appropriate conjunction: 'It rained all last week, ____ it’ll rain again today.'",
+  },
+  "6/15": {
+      "date": "6/15",
+      "Question": "Fill in the blank with the appropriate conjunction: “It rained all last week, ____ it’ll rain again today.”",
       "Answer": "And"
-    },
-    {
-      "Date": "6/17",
+  },
+  "6/17": {
+      "date": "6/17",
       "Question": "What formed the origins of magic?",
       "Answer": "Shamanism"
-    },
-    {
-      "Date": "6/22",
-      "Question": "Which of these is NOT known as a 'devilfish'?",
+  },
+  "6/22": {
+      "date": "6/22",
+      "Question": "Which of these is NOT known as a “devilfish”?",
       "Answer": "Jellyfish"
-    },
-    {
-      "Date": "6/25",
+  },
+  "6/25": {
+      "date": "6/25",
       "Question": "What form of natural magic was used to look for water sources?",
       "Answer": "Dowsing"
-    },
-    {
-      "Date": "6/29",
+  },
+  "6/29": {
+      "date": "6/29",
       "Question": "Which way does the swirl go in the northern hemisphere?",
       "Answer": "It can go either way."
-    }
-  ],
-  "July classroom answers": [
-    {
-      "Date": "7/3",
+  },
+  "7/3": {
+      "date": "7/3",
       "Question": "How am I supposed to know about someone who lived that long ago? Wh-What do I say, [protagonist name]?",
       "Answer": "The Global Heritage Pavilion"
-    },
-    {
-      "Date": "7/8",
+  },
+  "7/8": {
+      "date": "7/8",
       "Question": "Which of these phrases is incorrect? (and is an example of a comma splice)",
-      "Answer": "I’ve failed, it’s over now."
-    },
-    {
-      "Date": "7/9",
+      "Answer": "“I’ve failed, it’s over now.”"
+  },
+  "7/9": {
+      "date": "7/9",
       "Question": "What law served as a foundation of the development of feudalism?",
       "Answer": "The Konden Eizen Shizaihou"
-    },
-    {
-      "Date": "7/10",
+  },
+  "7/10": {
+      "date": "7/10",
       "Question": "What is the mystical study of Jewish texts?",
       "Answer": "Kabbalah"
-    },
-    {
-      "Date": "7/11",
+  },
+  "7/11": {
+      "date": "7/11",
       "Question": "What title did Taira No Masakado claim for himself?",
       "Answer": "The Imperial Prince"
-    }
-  ],
-  "First semester final exam": [
-    {
-      "Date": "7/14",
+  },
+  "7/14": {
+      "date": "7/14",
       "Question": "What is the form of natural magic used to find water sources?",
       "Answer": "Dowsing"
-    },
-    {
-      "Date": "7/15",
-      "Question": "Some Europeans call this creature 'devilfish' and refuse to eat it.",
+  },
+  "7/15": {
+      "date": "7/15",
+      "Question": "Some Europeans call this creature “devilfish” and refuse to eat it.",
       "Answer": "Octopus"
-    },
-    {
-      "Date": "7/16",
+  },
+  "7/16": {
+      "date": "7/16",
       "Question": "Who established the Kamakura Shogunate?",
       "Answer": "Minamoto No Yoritomo"
-    },
-    {
-      "Date": "7/17",
+  },
+  "7/17": {
+      "date": "7/17",
       "Question": "Which is an example of a comma splice?",
-      "Answer": "I went, I learned."
-    }
-  ],
-  "September classroom answers": [
-    {
-      "Date": "9/1",
+      "Answer": "“I went, I learned.”"
+  },
+  "9/1": {
+      "date": "9/1",
       "Question": "What do you call the phenomenon when electrical resistance is zero?",
       "Answer": "Superconductivity"
-    },
-    {
-      "Date": "9/10",
+  },
+  "9/10": {
+      "date": "9/10",
       "Question": "What do we say after we eat?",
       "Answer": "Gochisou-sama"
-    },
-    {
-      "Date": "9/11",
+  },
+  "9/11": {
+      "date": "9/11",
       "Question": "What book helped further the art of magic during the Renaissance?",
       "Answer": "The Hermetica"
-    },
-    {
-      "Date": "9/14",
+  },
+  "9/14": {
+      "date": "9/14",
       "Question": "Which of these is NOT one of Japan’s prohibitions on nuclear weapons?",
       "Answer": "Can’t let others produce."
-    },
-    {
-      "Date": "9/26",
+  },
+  "9/26": {
+      "date": "9/26",
       "Question": "What is the collective name for the four holy numbers in numerology?",
       "Answer": "The Tetractys."
-    }
-  ],
-  "October classroom answers": [
-    {
-      "Date": "10/7",
+  },
+  "10/7": {
+      "date": "10/7",
       "Question": "Do you know why a matador’s capote is red?",
       "Answer": "To excite the audience."
-    }
-  ],
-  "Second semester midterms": [
-    {
-      "Date": "10/13",
+  },
+  "10/13": {
+      "date": "10/13",
       "Question": "What is the number one source of stress for women?",
       "Answer": "Husbands"
-    },
-    {
-      "Date": "10/14",
+  },
+  "10/14": {
+      "date": "10/14",
       "Question": "Who founded numerology?",
       "Answer": "Moses"
-    },
-    {
-      "Date": "10/15",
+  },
+  "10/15": {
+      "date": "10/15",
       "Question": "What is superconductivity?",
       "Answer": "Zero electric resistance"
-    },
-    {
-      "Date": "10/16",
+  },
+  "10/16": {
+      "date": "10/16",
       "Question": "The Ohnin War was one of the two incidents that triggered the Sengoku era. Which was the other?",
       "Answer": "Coup of Meiou"
-    },
-    {
-      "Date": "10/19",
+  },
+  "10/19": {
+      "date": "10/19",
       "Question": "How many calendar patterns are there?",
       "Answer": "Fourteen"
-    },
-    {
-      "Date": "10/22",
+  },
+  "10/22": {
+      "date": "10/22",
       "Question": "Natto comes from soybeans, too, but how is it made?",
       "Answer": "By fermenting them"
-    },
-    {
-      "Date": "10/23",
+  },
+  "10/23": {
+      "date": "10/23",
       "Question": "Who is the founder of Theosophy, which gave rise to many magical societies?",
       "Answer": "Madam Blavatsky"
-    },
-    {
-      "Date": "10/26",
+  },
+  "10/26": {
+      "date": "10/26",
       "Question": "But which one of these things is NOT Arabic?",
       "Answer": "Wristwatch"
-    },
-    {
-      "Date": "10/29",
+  },
+  "10/29": {
+      "date": "10/29",
       "Question": "One type of acid’s function is to break lactic acid into glucose and galactose. What is that enzyme called?",
       "Answer": "Lactase"
-    }
-  ],
-  "November classroom answers": [
-    {
-      "Date": "11/7",
-      "Question": "As Sei Shounagon once said, 'fuyu wa tsutomete…' I’m sure you know what that means, [protagonist name].",
+  },
+  "11/7": {
+      "date": "11/7",
+      "Question": "As Sei Shounagon once said, 'fuyu wa tsutomete...' I’m sure you know what that means, [protagonist name].",
       "Answer": "Winter mornings are pleasant."
-    },
-    {
-      "Date": "11/12",
+  },
+  "11/12": {
+      "date": "11/12",
       "Question": "What is the ancient Indian magical text I mentioned today?",
       "Answer": "The Upanishads"
-    },
-    {
-      "Date": "11/30",
+  },
+  "11/30": {
+      "date": "11/30",
       "Question": "They used white makeup, plucked their eyebrows in favor of drawn-on ones, and colored their teeth with limonite. But do you think the men did these things?",
       "Answer": "They did both"
-    }
-  ],
-  "December classroom answers": [
-    {
-      "Date": "12/7",
-      "Question": "Which allotrope is formed by three oxygen atoms.",
+  },
+  "12/7": {
+      "date": "12/7",
+      "Question": "Which allotrope is formed by three oxygen atoms?",
       "Answer": "Ozone"
-    },
-    {
-      "Date": "12/11",
+  },
+  "12/11": {
+      "date": "12/11",
       "Question": "Did you hear what she said, [protagonist name]? Do you know the answer?",
       "Answer": "Cacti"
-    }
-  ],
-  "December Exams": [
-    {
-      "Date": "12/14",
+  },
+  "12/14": {
+      "date": "12/14",
       "Question": "What year did the battle of Dan-no-ura begin?",
       "Answer": "1185"
-    },
-    {
-      "Date": "12/15",
+  },
+  "12/15": {
+      "date": "12/15",
       "Question": "Which element is found in the ozone?",
       "Answer": "Oxygen"
-    },
-    {
-      "Date": "12/16",
+  },
+  "12/16": {
+      "date": "12/16",
       "Question": "Which rule relates to the Lorentz Force?",
       "Answer": "Left-hand rule"
-    },
-    {
-      "Date": "12/17",
-      "Question": "Translate the following: 'Fuyu wa tsutomete.'",
+  },
+  "12/17": {
+      "date": "12/17",
+      "Question": "Translate the following: “Fuyu wa tsutomete.”",
       "Answer": "Winter mornings are pleasant."
-    },
-    {
-      "Date": "12/18",
+  },
+  "12/18": {
+      "date": "12/18",
       "Question": "Which plural is formed correctly?",
       "Answer": "Cacti"
-    },
-    {
-      "Date": "12/21",
+  },
+  "12/21": {
+      "date": "12/21",
       "Question": "What sorcery was Himiko said to have used?",
       "Answer": "Kido."
-    },
-    {
-      "Date": "12/22",
+  },
+  "12/22": {
+      "date": "12/22",
       "Question": "What is the feeling of happiness in a near-death experience called?",
       "Answer": "Euphoria."
-    }
-  ],
-  "January classroom answers": [
-    {
-      "Date": "1/8",
+  },
+  "1/8": {
+      "date": "1/8",
       "Question": "Of the three phrases I’ve written on the blackboard, tell me… which one is correct?",
       "Answer": "It’s wrong."
-    },
-    {
-      "Date": "1/18",
+  },
+  "1/18": {
+      "date": "1/18",
       "Question": "I mentioned two Greek sorceresses. One was Medea; who was the other?",
       "Answer": "Circe."
-    }
-  ]
+  }
 }
-
