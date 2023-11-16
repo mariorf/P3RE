@@ -55,6 +55,7 @@ fun ExpandableCard(title: String, content: String, color: Color){
             .fillMaxWidth()
             .padding(top = 20.dp)
             .clickable { expanded = !expanded }
+            .animateContentSize()
         ,colors = CardDefaults.cardColors(
             containerColor = color,
         ), shape = RectangleShape) {
@@ -72,7 +73,6 @@ fun CardContent(title: String, expandedContent: String, color: Color, expanded:B
             .padding(12.dp)
             .animateContentSize(
                 animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioLowBouncy,
                     stiffness = Spring.StiffnessLow
                 )
             ).background(color)

@@ -1,5 +1,7 @@
 package com.example.p3re.screens
 
+import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,9 +19,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.p3re.R
+import com.example.p3re.data.ClassroomAnswer
+import com.example.p3re.data.Shadows
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 @Composable
-fun AnswersScreen() {
+fun AnswersScreen(context: Context) {
+
     Box(modifier = Modifier.fillMaxSize()) {
         //https://stackoverflow.com/questions/68937947/how-to-set-drawable-as-a-background-to-image-in-jetpack-compose
         Image(

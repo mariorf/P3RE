@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
@@ -99,7 +100,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
             if (data != null) {
-                viewModel.setDataList(data)
+                viewModel.setShadowList(data)
             }
         }
 

@@ -57,7 +57,7 @@ fun NavGraph(
         }
         composable(Screen.Answers.route) {
             viewModel.updateSelectedTabName("ANSWERS")
-            AnswersScreen()
+            AnswersScreen(context)
         }
         composable(Screen.DetailedShadow.route) {
             /*DetailedShadowScreen(shadow = shadowViewModel.getShadow())*/

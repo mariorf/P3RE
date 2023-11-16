@@ -28,16 +28,16 @@ var selectedSocialLink by mutableStateOf<SocialLink?>(null)
 
 class ViewModel() : ViewModel() {
 
-    val dataList = MutableLiveData<List<SHHADOW>>()
+    private val _dataList = MutableStateFlow<List<SHHADOW>>(emptyList())
 
-    fun setDataList(data: List<SHHADOW>) {
-        dataList.value = data
-        Log.d("LISTA TAM", dataList.value?.size.toString())
-
+    fun setShadowList(data: List<SHHADOW>) {
+        _dataList.value = data
+        Log.d("LISTA TAM", _dataList.value.size.toString())
     }
 
-    fun getDataList(): LiveData<List<SHHADOW>> {
-        return dataList
+    fun getDataList2(): StateFlow<List<SHHADOW>> {
+
+        return _dataList
     }
 
     fun setShadow(shadow: Shadows) {
