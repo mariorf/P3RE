@@ -116,7 +116,7 @@ fun TableCell(valueFirstCell: String, valueSecondCell: String) {
         Box(
             modifier = Modifier
                 .size(100.dp, 40.dp)
-                .border(3.dp, Color.White)
+                .border(2.dp, Color.Black)
                 .background(Color.Transparent),
 
             contentAlignment = Alignment.Center
@@ -126,7 +126,7 @@ fun TableCell(valueFirstCell: String, valueSecondCell: String) {
         Box(
             modifier = Modifier
                 .size(100.dp, 40.dp)
-                .border(2.dp, Color.White)
+                .border(2.dp, Color.Black)
                 .background(Color.Transparent),
             contentAlignment = Alignment.Center
         ) {
@@ -147,7 +147,7 @@ fun rowDataShadow(label: String) {
             .fillMaxWidth()
             //padding para que no se toquen entre los Box
             .background(Color.Transparent)
-            .border(border = BorderStroke(width = 1.dp, color = Color.White))
+            .border(border = BorderStroke(width = 1.dp, color = Color.Black))
     ) {
         //Row dentro del contenedor Box que es la etiqueta principal para añadir el cuadrito amarillo y texto alineados en el centro
         Row(
