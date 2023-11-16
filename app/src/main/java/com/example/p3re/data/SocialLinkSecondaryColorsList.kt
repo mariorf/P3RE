@@ -7,7 +7,7 @@ object SocialLinkSecondaryColorsList {
 
     fun secondayColorsList(): List<Pair<Color, String>> {
         return listOf(
-            Color(85, 49, 49) to "Makoto Yuki",
+            Color(220, 111, 82) to "Makoto Yuki",
             Color(140, 242, 149, 255) to "Yukari Takeba",
             Color(163, 132, 49, 255) to "Junpei Iori",
             Color(184, 177, 169) to "Akihiko Sanada",

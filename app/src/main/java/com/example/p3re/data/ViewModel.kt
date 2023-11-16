@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 //Inicializar en null
@@ -17,7 +18,11 @@ val _selectedTabName = mutableStateOf("SHADOWS")
 var selectedSocialLink by mutableStateOf<SocialLink?>(null)
 
 
-open class ViewModel() : ViewModel() {
+
+
+class ViewModel() : ViewModel() {
+
+    var shadowList = MutableLiveData<List<SHHADOW>>()
 
     fun setShadow(shadow: Shadows) {
 
@@ -46,7 +51,7 @@ open class ViewModel() : ViewModel() {
     }
 
     var topBarTextColor by  mutableStateOf(Color(10, 21, 70, 255))
-    fun updateTopBarTextColor(updatedColor: Color){
+    fun updateTopBarTextColor(updatedColor: Color) {
         topBarTextColor = updatedColor
     }
 

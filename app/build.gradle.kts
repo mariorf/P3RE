@@ -193,6 +193,7 @@ dependencies {
         testImplementation("androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version")
     }
 
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
 
 
 

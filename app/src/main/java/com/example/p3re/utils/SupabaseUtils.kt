@@ -47,13 +47,14 @@ object SupabaseUtils {
         return client
     }
     //https://www.youtube.com/shorts/aQw_97TqTQU
-    suspend fun getData() {
+    suspend fun getData(): List<SHHADOW>? {
                     val client = getClient()
                     val supabaseResponse = client.postgrest["p3_shadows"].select()
                     shadowListResponse = supabaseResponse.decodeList<SHHADOW>()
                     for (SHHADOW in shadowListResponse!!){
                         Log.d("ACÁ", SHHADOW.name)
                     }
+        return shadowListResponse
     }
 }
 

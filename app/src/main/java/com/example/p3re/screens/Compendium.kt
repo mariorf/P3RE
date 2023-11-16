@@ -2,6 +2,7 @@ package com.example.p3re.screens
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -34,13 +35,8 @@ import com.example.p3re.R
 import com.example.p3re.data.Fonts
 import com.example.p3re.data.Shadows
 import com.example.p3re.data.ViewModel
-import com.example.p3re.utils.SupabaseUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import io.github.ferhatwi.supabase.Supabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -98,9 +94,23 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
     //Instancia del viewModel
     val viewModel = remember { ViewModel() }
 
+    if(viewModel.shadowList.value?.isEmpty() == true){
+        Log.d("MUERTE A ISRAEL", "JIJI")
+    }else{
+        Log.d("MUERTE A ISRAEL", viewModel.shadowList.value?.size.toString())
+    }
+
+
+    viewModel.shadowList.value?.forEach { index ->
+
+        Log.d("sexo anal", index.name)
+    }
 
     //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR HACER BACKGROUNDS
     Box(modifier = Modifier.fillMaxSize()) {
+
+        //collectAsState solo se puede usar en composables
+
 
         //https://stackoverflow.com/questions/68937947/how-to-set-drawable-as-a-background-to-image-in-jetpack-compose
         Image(
@@ -117,10 +127,11 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
             //Estado del scroll (no se guarda al navegar con la bottomBar)
             state = scrollState,
 
+
+
             content = {
                 items(shadowsList.size) { index ->
                     val shadow = shadowsList[index]
-
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()

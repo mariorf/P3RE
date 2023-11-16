@@ -70,7 +70,6 @@ fun NavGraph(
                 viewModel.updateSelectedTabName(
                     it1.uppercase())
             }
-
             //Navegar con parametro social link y viewmodel
             viewModel.getSocialLink()?.let { it1 -> DetailedSocialLinkScreen(socialLink = it1, viewModel = viewModel) }
         }

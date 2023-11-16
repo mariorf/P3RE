@@ -21,4 +21,9 @@ object Fonts {
         Font(R.font.minerva_modern_italic),
         Font(R.font.minerva_modern_bold_italic)
     )
+
+    val sanMarinoBeachfamily = FontFamily(
+
+        Font(R.font.san_marino_beach)
+    )
 }

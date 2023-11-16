@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -33,18 +34,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import com.example.p3re.screens.NavGraph
 import com.example.p3re.ui.theme.P3RETheme
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.p3re.data.CharacterData
 import com.example.p3re.data.ViewModel
 import com.example.p3re.data.Fonts
 import com.example.p3re.data.SHHADOW
 import com.example.p3re.data.ShadowApp
 import com.example.p3re.data.SocialLink
 import com.example.p3re.data.getShadowsFromURL
+import com.example.p3re.data.selectedShadow
 import com.example.p3re.screens.Screen
 import com.example.p3re.utils.SupabaseUtils
 import com.google.gson.Gson
@@ -61,10 +63,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.util.concurrent.Executor
 
 
 //Clase per a crear els items de la barra de navegació inferior
@@ -82,9 +86,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val viewModel: ViewModel by viewModels()
 
         lifecycleScope.launch {
-            SupabaseUtils.getData()
+
+            viewModel.shadowList.value = SupabaseUtils.getData()
         }
 
 
@@ -122,9 +128,6 @@ class MainActivity : ComponentActivity() {
                     )
 
                 )
-
-                // Define el ViewModel
-                val viewModel: ViewModel = viewModel()
 
                 var selectedItemIndex by rememberSaveable {
                     //El index per defecte será el primer (0)
