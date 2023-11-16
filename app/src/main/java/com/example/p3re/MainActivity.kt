@@ -90,7 +90,11 @@ class MainActivity : ComponentActivity() {
 
         lifecycleScope.launch {
 
-            viewModel.shadowList.value = SupabaseUtils.getData()
+            val data = SupabaseUtils.getData()
+
+            if (data != null) {
+                viewModel.updateShadowList(data)
+            }
         }
 
 

@@ -18,6 +18,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.room.TypeConverters
 import com.example.p3re.R
@@ -91,31 +94,22 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
     //Recordar el estado del scroll
     val scrollState = rememberLazyListState()
 
-    //Instancia del viewModel
-    val viewModel = remember { ViewModel() }
+    val viewModel: ViewModel = viewModel()
 
-    if(viewModel.shadowList.value?.isEmpty() == true){
-        Log.d("MUERTE A ISRAEL", "JIJI")
-    }else{
-        Log.d("MUERTE A ISRAEL", viewModel.shadowList.value?.size.toString())
-    }
+    viewModel.getShadowListiveData()
 
+    val shadowListState by viewModel.shadowList.observeAsState(initial = emptyList())
 
-    viewModel.shadowList.value?.forEach { index ->
-
-        Log.d("sexo anal", index.name)
-    }
+    Log.d("SHADOWLISTSTATE", shadowListState.size.toString())
 
     //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR HACER BACKGROUNDS
     Box(modifier = Modifier.fillMaxSize()) {
 
         //collectAsState solo se puede usar en composables
 
-
-        //https://stackoverflow.com/questions/68937947/how-to-set-drawable-as-a-background-to-image-in-jetpack-compose
         Image(
             painter = painterResource(R.drawable.prueba1),
-            contentDescription = null, // Provide a description if needed
+            contentDescription = null,
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize()
         )
@@ -138,7 +132,10 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
                             //.padding(top = 30.dp)
                             .background(Color.Transparent)
                             .shadow(elevation = 1.dp, spotColor = Color(66, 238, 239))
-                            .border(border = BorderStroke(width = 1.dp, color = Color.White), shape = RectangleShape)
+                            .border(
+                                border = BorderStroke(width = 1.dp, color = Color.White),
+                                shape = RectangleShape
+                            )
                             .clickable {
 
 

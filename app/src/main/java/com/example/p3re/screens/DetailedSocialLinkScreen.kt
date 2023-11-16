@@ -158,7 +158,7 @@ fun DetailedSocialLinkScreen(socialLink: SocialLink, viewModel: ViewModel) {
                 if (secondaryColor != null) {
                     ExpandableCard(
                         "Rank " + index,
-                        "Contenidoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" + index,
+                        "Respuesta 1:" + index+"\n"+"Respuesta 2: "+index+"\n"+"Respuesta 3:" + index+"\n"+"Respuesta 4: "+index+"\n"+"Respuesta 5:" + index+"\n"+"Respuesta 6: "+index,
                         secondaryColor.first
                     )
                 }

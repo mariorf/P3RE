@@ -169,6 +169,15 @@ dependencies {
         // Lifecycles only (without ViewModel or LiveData)
         implementation("androidx.lifecycle:lifecycle-runtime:$lifecycle_version")
 
+
+        dependencies {
+            implementation("androidx.compose.runtime:runtime:1.5.4")
+            implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
+            implementation("androidx.compose.runtime:runtime-rxjava2:1.5.4")
+        }
+
+
+
         // Saved state module for ViewModel
         implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
 

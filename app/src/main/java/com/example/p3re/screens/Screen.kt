@@ -39,7 +39,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController,
-        startDestination = Screen.Shadows.route,
+        startDestination = Screen.SocialLinks.route,
         enterTransition = { fadeIn(animationSpec = tween(0)) },
         exitTransition= { fadeOut(animationSpec = tween(0)) }) {
 
