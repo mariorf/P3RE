@@ -31,11 +31,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.room.TypeConverters
 import com.example.p3re.R
 import com.example.p3re.data.Fonts
+import com.example.p3re.data.SHHADOW
 import com.example.p3re.data.Shadows
 import com.example.p3re.data.ViewModel
 import com.google.gson.Gson
@@ -96,11 +98,9 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
 
     val viewModel: ViewModel = viewModel()
 
-    viewModel.getShadowListiveData()
+    val shadowList2 by viewModel.dataList.observeAsState()
 
-    val shadowListState by viewModel.shadowList.observeAsState(initial = emptyList())
-
-    Log.d("SHADOWLISTSTATE", shadowListState.size.toString())
+    Log.d("homero", viewModel.dataList.value?.size.toString())
 
     //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR HACER BACKGROUNDS
     Box(modifier = Modifier.fillMaxSize()) {

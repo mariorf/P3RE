@@ -93,7 +93,13 @@ class MainActivity : ComponentActivity() {
             val data = SupabaseUtils.getData()
 
             if (data != null) {
-                viewModel.updateShadowList(data)
+
+                for (SHHADOW in SupabaseUtils.shadowListResponse!!){
+                    Log.d("ACÁ", SHHADOW.name)
+                }
+            }
+            if (data != null) {
+                viewModel.setDataList(data)
             }
         }
 

@@ -51,9 +51,6 @@ object SupabaseUtils {
                     val client = getClient()
                     val supabaseResponse = client.postgrest["p3_shadows"].select()
                     shadowListResponse = supabaseResponse.decodeList<SHHADOW>()
-                    for (SHHADOW in shadowListResponse!!){
-                        Log.d("ACÁ", SHHADOW.name)
-                    }
         return shadowListResponse
     }
 }

@@ -2,6 +2,7 @@ package com.example.p3re.data
 
 import android.util.Log
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,6 +10,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 //Inicializar en null
 var selectedShadow by mutableStateOf<Shadows?>(null)
@@ -24,19 +28,18 @@ var selectedSocialLink by mutableStateOf<SocialLink?>(null)
 
 class ViewModel() : ViewModel() {
 
-    val _shadowList = MutableLiveData<List<SHHADOW>>()
-    val shadowList: LiveData<List<SHHADOW>> get() = _shadowList
-    fun updateShadowList(shadowList: List<SHHADOW>) {
-        _shadowList.value = shadowList
+    val dataList = MutableLiveData<List<SHHADOW>>()
+
+    fun setDataList(data: List<SHHADOW>) {
+        dataList.value = data
+        Log.d("LISTA TAM", dataList.value?.size.toString())
+
     }
 
-    fun getShadowListiveData(): LiveData<List<SHHADOW>> {
-
-
-        Log.d("ShadowListLiveData", _shadowList.value?.size.toString())
-
-        return shadowList
+    fun getDataList(): LiveData<List<SHHADOW>> {
+        return dataList
     }
+
     fun setShadow(shadow: Shadows) {
 
         selectedShadow = shadow
