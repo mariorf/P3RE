@@ -8,12 +8,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
@@ -35,39 +31,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import com.example.p3re.screens.NavGraph
 import com.example.p3re.ui.theme.P3RETheme
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.p3re.data.ViewModel
+import com.example.p3re.viewmodels.ViewModel
 import com.example.p3re.data.Fonts
-import com.example.p3re.data.SHHADOW
-import com.example.p3re.data.SocialLink
-import com.example.p3re.data.selectedShadow
 import com.example.p3re.screens.Screen
 import com.example.p3re.utils.SupabaseUtils
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.createSupabaseClient
-import io.github.jan.supabase.postgrest.Postgrest
-import io.github.jan.supabase.postgrest.postgrest
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.util.concurrent.Executor
 
 
 //Clase per a crear els items de la barra de navegació inferior

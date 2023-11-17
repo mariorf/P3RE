@@ -25,9 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.p3re.R
 import com.example.p3re.data.Fonts
-import com.example.p3re.data.SHHADOW
 import com.example.p3re.data.Shadows
-import com.example.p3re.data.selectedShadow
+import com.example.p3re.viewmodels.selectedShadow
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable

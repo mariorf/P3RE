@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.p3re.data.ViewModel
-import com.example.p3re.data.selectedSocialLink
+import com.example.p3re.viewmodels.ViewModel
+import com.example.p3re.viewmodels.selectedSocialLink
 
 sealed class Screen(val route: String){
     object SocialLinks : Screen("social_links")

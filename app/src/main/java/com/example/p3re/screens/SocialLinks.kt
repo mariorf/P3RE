@@ -22,11 +22,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.p3re.R
-import com.example.p3re.data.Shadows
 import com.example.p3re.data.SocialLink
 import com.example.p3re.data.SocialLinksImageList
-import com.example.p3re.data.ViewModel
-import com.example.p3re.screens.Screen
+import com.example.p3re.viewmodels.ViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader
