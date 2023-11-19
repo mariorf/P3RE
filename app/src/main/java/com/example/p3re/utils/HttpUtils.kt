@@ -11,12 +11,13 @@ import java.net.URL
 object HttpUtils {
     @Throws(IOException::class)
     operator fun get(dataUrl: String?): String? {
+
         val url = URL(dataUrl)
         var response: String?
         val urlConnection = url.openConnection() as HttpURLConnection
         response = try {
-            val `in`: InputStream = BufferedInputStream(urlConnection.inputStream)
-            readStream(`in`)
+            val inputStream: InputStream = BufferedInputStream(urlConnection.inputStream)
+            readStream(inputStream)
         } finally {
             urlConnection.disconnect()
         }
@@ -24,9 +25,10 @@ object HttpUtils {
     }
 
     @Throws(IOException::class)
-    private fun readStream(`in`: InputStream): String {
-        val `is` = InputStreamReader(`in`)
-        val rd = BufferedReader(`is`)
+    private fun readStream(inputStream: InputStream): String {
+
+        val inputStreamReader = InputStreamReader(inputStream)
+        val rd = BufferedReader(inputStreamReader)
         var line: String?
         val response = StringBuilder()
         while (rd.readLine().also { line = it } != null) {

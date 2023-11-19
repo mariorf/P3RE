@@ -34,6 +34,8 @@ import com.example.p3re.viewmodels.ViewModel
 import java.util.concurrent.Executors
 import android.os.Handler
 import android.os.Looper
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material3.Button
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,7 +46,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.p3re.data.Shadow
 import com.example.p3re.apis.ShadowsAPI
 import com.example.p3re.database.ShadowDAO
+import com.example.p3re.utils.WindowInfo
+import com.example.p3re.utils.rememberWindowInfo
 import com.example.p3re.viewmodels.ShadowsdbViewModel
+import com.example.p3re.screens.DetailedShadowScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,64 +77,109 @@ fun CompendiumScreen(navController: NavHostController) {
 
     var shadowsList = viewModelShadowDatabase.shadowsList
 
+    val windowInfo = rememberWindowInfo()
 
-    //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR HACER BACKGROUNDS
-    Box(modifier = Modifier.fillMaxSize()) {
+    if(windowInfo.screenWidthInfo == WindowInfo.WindowType.Small || windowInfo.screenWidthInfo == WindowInfo.WindowType.Medium) {
+        //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR HACER BACKGROUNDS
+        Box(modifier = Modifier.fillMaxSize()) {
 
-        Image(
-            painter = painterResource(R.drawable.prueba1),
-            contentDescription = null,
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier.fillMaxSize()
-        )
+            Image(
+                painter = painterResource(R.drawable.prueba1),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.fillMaxSize()
+            )
 
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 70.dp, top = 70.dp),
-            //Estado del scroll (no se guarda al navegar con la bottomBar)
-            state = scrollState,
-
-
-
-            content = {
-                items(shadowsList.size) { index ->
-                    val shadow = shadowsList[index]
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(Color.Transparent)
-                            .border(
-                                border = BorderStroke(width = 1.dp, color = Color.Black),
-                                shape = RectangleShape
-                            )
-                            .clickable {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 70.dp, top = 70.dp),
+                //Estado del scroll (no se guarda al navegar con la bottomBar)
+                state = scrollState,
 
 
-                                viewModel.setShadow(shadow)
-                                navController.navigate(Screen.DetailedShadow.route)
-                            },
+                content = {
+                    items(shadowsList.size) { index ->
+                        val shadow = shadowsList[index]
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color.Transparent)
+                                .border(
+                                    border = BorderStroke(width = 1.dp, color = Color.Black),
+                                    shape = RectangleShape
+                                )
+                                .clickable {
 
 
-                    ) {
-                        //Row dentro de la box principal para añadir el cuadrito de color amarillo
-                        //Esta rodea al cuadro amarillo y al texto, si quisiera añadir mas elementos a
-                        //cada nombre se añadiría aquí
+                                    viewModel.setShadow(shadow)
+                                    navController.navigate(Screen.DetailedShadow.route)
+                                },
+
+
+                            ) {
+                            //Row dentro de la box principal para añadir el cuadrito de color amarillo
+                            //Esta rodea al cuadro amarillo y al texto, si quisiera añadir mas elementos a
+                            //cada nombre se añadiría aquí
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(horizontal = 10.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+
+                                ) {
+                                Text(
+                                    text = shadow.name.uppercase(),
+                                    color = Color(10, 21, 70, 255),
+                                    fontSize = 18.sp,
+                                    modifier = Modifier.padding(
+                                        start = 8.dp,
+                                        top = 26.dp,
+                                        bottom = 26.dp
+                                    ),
+                                    fontFamily = Fonts.summerFontFamily,
+                                    fontWeight = FontWeight.Normal,
+                                )
+                            }
+                        }
+                    }
+                }
+            )
+        }
+    }else {
+        Box(modifier = Modifier.fillMaxSize()) {
+            Image(
+                painter = painterResource(R.drawable.prueba1),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.fillMaxSize()
+            )
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 70.dp, bottom = 70.dp)
+            ) {
+                LazyColumn(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                ) {
+                    items(shadowsList.size) { index ->
+                        val shadow = shadowsList[index]
                         Row(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(horizontal = 10.dp),
+                                .padding(horizontal = 10.dp)
+                                .clickable {
+
+                                    viewModel.setShadow(shadow)
+                                },
                             verticalAlignment = Alignment.CenterVertically,
 
                             ) {
-                            //Esta Box es el cuadrito pequeño
-                            /*Box(
-                                modifier = Modifier
-                                    .background(Color(9, 45, 197))
-                                    .size(16.dp)
-                            )*/
                             Text(
-                                text = shadow.name.uppercase(),
+                                text = shadow.name,
                                 color = Color(10, 21, 70, 255),
                                 fontSize = 18.sp,
                                 modifier = Modifier.padding(
@@ -141,19 +191,18 @@ fun CompendiumScreen(navController: NavHostController) {
                                 fontWeight = FontWeight.Normal,
                             )
                         }
+
                     }
                 }
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                ) {
+                    viewModel.getShadow()?.let { DetailedShadowScreen(shadow = it) }
+                }
             }
-        )
+        }
     }
 }
-
-
-/*RequiresApi(Build.VERSION_CODES.Q)
-@Composable
-@Preview(showBackground = true)
-fun HomeScreenPreview() {
-
-
-    CompendiumScreen()
-}*/

@@ -14,7 +14,7 @@ var BASE_URL = "https://kcpdykkspiuyjmwvyxqa.supabase.co/rest/v1/"
 
 var API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtjcGR5a2tzcGl1eWptd3Z5eHFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTk3MTMxMTMsImV4cCI6MjAxNTI4OTExM30.phkffCnV3l_i3KtM4VRjfeTWHz_d50JnEj1v0oCJh-g" // Codi Proporcionat per themoviedb
 
-public class ShadowsAPI{
+class ShadowsAPI{
 
     fun getShadows(): ArrayList<Shadow>? {
         val builtUri = Uri.parse(BASE_URL)

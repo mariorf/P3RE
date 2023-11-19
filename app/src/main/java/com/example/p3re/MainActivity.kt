@@ -64,34 +64,6 @@ class MainActivity : ComponentActivity() {
 
         val viewModel: ViewModel by viewModels()
 
-        //val shadowViewModel = ViewModelProvider(this).get(ShadowsdbViewModel::class.java)
-
-        /*val executor: ExecutorService = Executors.newSingleThreadExecutor()
-        executor.execute {
-            val api = ShadowsAPI()
-            val result = api.getShadows()
-            if (result != null) {
-                shadowViewModel.insertShadows(result)
-                val allShadows = shadowViewModel.getAllShadows()
-            }
-        }*/
-
-        /*lifecycleScope.launch {
-
-            val data = SupabaseUtils.getData()
-
-            if (data != null) {
-
-                for (SHHADOW in SupabaseUtils.shadowListResponse!!){
-                    Log.d("ACÁ", SHHADOW.name)
-                }
-            }
-            if (data != null) {
-                viewModel.setShadowList(data)
-            }
-        }*/
-
-
         setContent {
             P3RETheme {
                 val navController = rememberNavController()
@@ -207,74 +179,6 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier.padding(start = 10.dp, bottom = 4.dp)
                                 )
                         }
-
-
-                        //BOTTOM BAR
-                        /*bottomBar = {
-
-                            //Podria usar un navigationRail per a laterals
-                            NavigationBar(
-                                //containerColor = Color(48, 62, 140)
-                            ) {
-                                //items es el nom de la llista de BottonNavigationItems de la navigation bar (tot creat dalt)
-                                //for each, per cada item se mostra el seu corresponent NavigationBarItem depenent del index
-                                //index es autoincremental, comença en 0
-                                itemsNavigationBar.forEachIndexed { index, itemsNavigationBar ->
-                                    NavigationBarItem(
-                                        //posara el valor per defecte de la variable de dalt
-                                        selected = false,
-
-                                        //Nom del item per al menú (bottom)
-                                        label = {
-                                            Text(
-                                                text = itemsNavigationBar.title,
-                                                color = Color.White,
-                                                fontFamily = minervaFamily,
-                                                fontWeight = FontWeight.Normal
-                                            )
-
-                                        },
-
-                                        onClick = {
-
-                                            selectedItemIndex = index
-
-                                            //Si el nom del item on click coincideix en alguna de les opcions crida al nav controler y navega hasta ella
-                                            when (itemsNavigationBar.title) {
-                                                "S.Links" -> {
-                                                    navController.navigate(Screen.SocialLinks.route)
-                                                }
-                                                "Shadows" -> {
-                                                    navController.navigate(Screen.Shadows.route)
-                                                }
-                                                "Fusion Calc" -> {
-                                                    navController.navigate(Screen.FusionCalculator.route)
-                                                }
-                                                "Answers" -> {
-                                                    navController.navigate(Screen.Answers.route)
-                                                }
-                                            }
-
-                                        },
-
-                                        icon = {
-                                            Icon(
-                                                //si el index coincidix en el item seleccionat per l'usuari (o el default) mostra l'icona en mode seleccionat, si no la no seleccionada
-                                                imageVector =
-                                                if (index == selectedItemIndex) {
-                                                    itemsNavigationBar.selectedIcon
-                                                } else {
-                                                    itemsNavigationBar.unselectedIcon
-                                                },
-                                                //contentDescription es sobretot por a la accessibilitat, per a que per exemple persones cegues sápiguen on estan navegant dins l'aplicació
-                                                //(p.e TalkBack en este cas diría el titol del meu item
-                                                contentDescription = itemsNavigationBar.title,
-                                            )
-                                        })
-                                }
-                            }
-                        },*/
-
 
                     ) {
                         NavGraph(navController, viewModel, this)

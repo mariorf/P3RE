@@ -28,9 +28,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.p3re.R
 import com.example.p3re.data.Answers
 import com.example.p3re.data.Fonts
+import com.example.p3re.viewmodels.AnswersdbViewModel
+import com.example.p3re.viewmodels.ShadowsdbViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader
@@ -40,40 +43,9 @@ import java.io.InputStreamReader
 @Composable
 fun AnswersScreen(context: Context) {
 
-    //Leo el archivo aqui porque necesito el contexto que me pasan como parametro
-    var json: String?
+    val viewModelAnswersdb : AnswersdbViewModel = viewModel()
 
-    //Abro el json con un InputStream
-    val inputStream = context.assets.open("answers.json")
-
-    //BufferedReader para que sea mas rápido
-    val reader = BufferedReader(InputStreamReader(inputStream))
-
-    //Creo el string builder
-    val jsonStringBuilder = StringBuilder()
-
-    //Linea para ir metiendo al archivo final
-    var line: String?
-
-    //append en kotlin para crear el String final
-    while (reader.readLine().also { line = it } != null) {
-        jsonStringBuilder.append(line)
-    }
-
-    //Cierro buffered reader e input string
-    reader.close()
-    inputStream.close()
-
-
-    //json final
-    json = jsonStringBuilder.toString()
-
-    val gson = Gson()
-    val mapType = object : TypeToken<Map<String, Answers>>() {}.type
-    val answersMap: Map<String, Answers> = gson.fromJson(json, mapType)
-
-    val answersList = answersMap.values.toList()
-
+    var answersList = viewModelAnswersdb.answersList
 
     Box(Modifier.fillMaxSize()){
 

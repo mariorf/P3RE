@@ -1,24 +1,17 @@
 package com.example.p3re.viewmodels
 
 import android.app.Application
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.Room
 import com.example.p3re.apis.ShadowsAPI
 import com.example.p3re.database.ShadowDAO
 import com.example.p3re.data.Shadow
-import com.example.p3re.database.ShadowDatabase
+import com.example.p3re.database.AppDatabase
 import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
-import com.example.p3re.viewmodels.ShadowsdbViewModel
-
-var databaseCreated by mutableStateOf(false)
 
 class ShadowsdbViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -33,7 +26,7 @@ class ShadowsdbViewModel(application: Application) : AndroidViewModel(applicatio
         ShadowDatabase::class.java, "shadow-database"
     ).build()*/
 
-    val database: ShadowDatabase = ShadowDatabase.DatabaseBuilder.getDatabase(application.applicationContext)
+    val database: AppDatabase = AppDatabase.DatabaseBuilder.getDatabase(application.applicationContext)
 
     init {
         shadowDAO = database.getShadowDAO()
