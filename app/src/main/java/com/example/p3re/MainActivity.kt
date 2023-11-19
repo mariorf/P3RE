@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
 
         val viewModel: ViewModel by viewModels()
 
-        val shadowViewModel = ViewModelProvider(this).get(ShadowsdbViewModel::class.java)
+        //val shadowViewModel = ViewModelProvider(this).get(ShadowsdbViewModel::class.java)
 
         /*val executor: ExecutorService = Executors.newSingleThreadExecutor()
         executor.execute {

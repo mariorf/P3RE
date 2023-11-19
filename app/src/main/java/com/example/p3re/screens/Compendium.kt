@@ -34,10 +34,12 @@ import com.example.p3re.viewmodels.ViewModel
 import java.util.concurrent.Executors
 import android.os.Handler
 import android.os.Looper
+import androidx.compose.material3.Button
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.lifecycle.ViewModelProvider
 import com.example.p3re.data.Shadow
 import com.example.p3re.apis.ShadowsAPI
@@ -66,31 +68,10 @@ fun CompendiumScreen(navController: NavHostController) {
 
     val viewModel: ViewModel = viewModel()
 
-    val executor = Executors.newSingleThreadExecutor()
-
-    val handler = Handler(Looper.getMainLooper())
-
-    //var shadowsList by remember { mutableStateOf(ArrayList<Shadow>()) }
-
     val viewModelShadowDatabase : ShadowsdbViewModel = viewModel()
 
-    //val shadowViewModel = ViewModelProvider(this).get(ShadowsdbViewModel::class.java)
-
-    /*executor.execute {
-        val api = ShadowsAPI()
-        val result = api.getShadows()
-        handler.post {
-            result?.let { shadows ->
-                shadowsList = shadows
-                shadowViewModel.insertShadows(shadowsList)
-                val allShadows = shadowViewModel.getAllShadows()
-            }
-        }
-    }*/
-
-
-
     var shadowsList = viewModelShadowDatabase.shadowsList
+
 
     //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR HACER BACKGROUNDS
     Box(modifier = Modifier.fillMaxSize()) {

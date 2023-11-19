@@ -31,6 +31,8 @@ import com.example.p3re.data.SocialLink
 import com.example.p3re.data.SocialLinkBackgroundList
 import com.example.p3re.data.SocialLinkSecondaryColorsList
 import com.example.p3re.data.SocialLinksImageList
+import com.example.p3re.utils.WindowInfo
+import com.example.p3re.utils.rememberWindowInfo
 import com.example.p3re.viewmodels.ViewModel
 
 @SuppressLint("SuspiciousIndentation")
@@ -62,89 +64,90 @@ fun DetailedSocialLinkScreen(socialLink: SocialLink, viewModel: ViewModel) {
         viewModel.updateTopBarTextColor(secondaryColor.first)
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize()) {
 
-        //FONDO
-        Image(
-            painter = painterResource(drawableId),
-            contentDescription = null,
-            contentScale = ContentScale.FillBounds,
-        )
+            //FONDO
+            Image(
+                painter = painterResource(drawableId),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+            )
 
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 70.dp, top = 70.dp, start = 10.dp, end = 10.dp),
-            contentPadding = PaddingValues(top = 20.dp)
-        ) {
-            item {
-                if (secondaryColor != null) {
-                    Row(
-                        modifier = Modifier
-                            .height(150.dp)
-                            .fillMaxSize()
-                            .background(secondaryColor.first)
-                            .shadow(10.dp)
-                    ) {
-                        Box(
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 70.dp, top = 70.dp, start = 10.dp, end = 10.dp),
+                contentPadding = PaddingValues(top = 20.dp)
+            ) {
+                item {
+                    if (secondaryColor != null) {
+                        Row(
                             modifier = Modifier
-                                .fillMaxHeight()
+                                .height(150.dp)
+                                .fillMaxSize()
+                                .background(secondaryColor.first)
+                                .shadow(10.dp)
                         ) {
-                            Image(
-                                painter = painterResource(characterImageId),
-                                contentDescription = null,
+                            Box(
                                 modifier = Modifier
                                     .fillMaxHeight()
-                                    .align(Alignment.Center)
-                            )
-                        }
-
-                        Box(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxHeight()
-                        ) {
-
-                            Column(
-                                Modifier
-                                    .fillMaxSize()
                             ) {
+                                Image(
+                                    painter = painterResource(characterImageId),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                        .align(Alignment.Center)
+                                )
+                            }
+
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                            ) {
+
                                 Column(
                                     Modifier
                                         .fillMaxSize()
-                                        .background(secondaryColor.first)
                                 ) {
-                                    Column(Modifier.padding(8.dp)) {
-                                        Text(
-                                            text = socialLink.name,
-                                            fontFamily = Fonts.summerFontFamily,
-                                            fontSize = 26.sp
-                                        )
-                                        Text(
-                                            text = socialLink.arcana,
-                                            fontFamily = Fonts.summerFontFamily,
-                                            fontSize = 12.sp,
-                                            color = Color.Black
-                                        )
+                                    Column(
+                                        Modifier
+                                            .fillMaxSize()
+                                            .background(secondaryColor.first)
+                                    ) {
+                                        Column(Modifier.padding(8.dp)) {
+                                            Text(
+                                                text = socialLink.name,
+                                                fontFamily = Fonts.summerFontFamily,
+                                                fontSize = 26.sp
+                                            )
+                                            Text(
+                                                text = socialLink.arcana,
+                                                fontFamily = Fonts.summerFontFamily,
+                                                fontSize = 12.sp,
+                                                color = Color.Black
+                                            )
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            items(10) { index ->
-                if (secondaryColor != null) {
-                    ExpandableCard(
-                        "Rank " + index,
-                        "Respuesta 1:" + index+"\n"+"Respuesta 2: "+index+"\n"+"Respuesta 3:" + index+"\n"+"Respuesta 4: "+index+"\n"+"Respuesta 5:" + index+"\n"+"Respuesta 6: "+index,
-                        secondaryColor.first
-                    )
+                items(10) { index ->
+                    if (secondaryColor != null) {
+                        ExpandableCard(
+                            "Rank " + index,
+                            "Respuesta 1:" + index + "\n" + "Respuesta 2: " + index + "\n" + "Respuesta 3:" + index + "\n" + "Respuesta 4: " + index + "\n" + "Respuesta 5:" + index + "\n" + "Respuesta 6: " + index,
+                            secondaryColor.first
+                        )
+                    }
                 }
             }
         }
-    }
+
     //https://developer.android.com/jetpack/compose/side-effects
     DisposableEffect(Unit) {
         onDispose {

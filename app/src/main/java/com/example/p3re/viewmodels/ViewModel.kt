@@ -55,6 +55,4 @@ class ViewModel() : ViewModel() {
     fun updateTopBarTextColor(updatedColor: Color) {
         topBarTextColor = updatedColor
     }
-
-
 }

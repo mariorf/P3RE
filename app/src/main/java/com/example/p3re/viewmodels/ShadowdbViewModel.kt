@@ -3,6 +3,7 @@ package com.example.p3re.viewmodels
 import android.app.Application
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,12 +16,13 @@ import com.example.p3re.data.Shadow
 import com.example.p3re.database.ShadowDatabase
 import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
+import com.example.p3re.viewmodels.ShadowsdbViewModel
+
+var databaseCreated by mutableStateOf(false)
 
 class ShadowsdbViewModel(application: Application) : AndroidViewModel(application) {
 
     val executor = Executors.newSingleThreadExecutor()
-
-    val handler = Handler(Looper.getMainLooper())
 
     var shadowsList by mutableStateOf<ArrayList<Shadow>>(ArrayList())
 
@@ -37,23 +39,25 @@ class ShadowsdbViewModel(application: Application) : AndroidViewModel(applicatio
         shadowDAO = database.getShadowDAO()
 
         viewModelScope.launch{
-            executor.execute {
-                val api = ShadowsAPI()
-                val result = api.getShadows()
+                executor.execute {
+                    val api = ShadowsAPI()
+                    val result = api.getShadows()
 
-                if (result != null) {
-                    shadowDAO.insertAllShadows(result)
-                }
-                shadowsList = shadowDAO.getAllShadows() as ArrayList<Shadow>
-                /*handler.post {
-
-                    result?.let { shadows ->
-                        shadowsList = shadows
+                    if (result != null) {
+                        shadowDAO.insertAllShadows(result)
                     }
-                }*/
+                    shadowsList = shadowDAO.getAllShadows() as ArrayList<Shadow>
+                    /*handler.post {
+
+                        result?.let { shadows ->
+                            shadowsList = shadows
+                        }
+                    }*/
+                }
             }
         }
     }
+
 
     /*init {
         shadowDAO = db.getShadowDAO()
@@ -70,25 +74,3 @@ class ShadowsdbViewModel(application: Application) : AndroidViewModel(applicatio
             }
         }
     }*/
-
-    fun getShadows(): List<Shadow> {
-        return shadowDAO.getAllShadows()
-    }
-
-    fun insertShadows(shadowList: ArrayList<Shadow>) {
-        shadowDAO.insertAllShadows(shadowList)
-    }
-
-    /*fun refresh(){
-        executor.execute {
-            val api = ShadowsAPI()
-            val result = api.getShadows()
-            handler.post {
-                result?.let { shadows ->
-                    shadowsList = shadows
-                    insertShadows(shadowsList)
-                }
-            }
-        }
-    }*/
-}
