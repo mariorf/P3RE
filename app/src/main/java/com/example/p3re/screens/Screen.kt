@@ -49,7 +49,7 @@ fun NavGraph(
         }
         composable(Screen.Shadows.route) {
             viewModel.updateSelectedTabName("SHADOWS")
-            CompendiumScreen(navController, context)
+            CompendiumScreen(navController)
         }
         composable(Screen.FusionCalculator.route) {
             viewModel.updateSelectedTabName("FUSION")

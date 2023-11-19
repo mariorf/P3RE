@@ -7,15 +7,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
-import com.example.p3re.data.SHHADOW
-import com.example.p3re.data.Shadows
+import com.example.p3re.data.Shadow
 import com.example.p3re.data.SocialLink
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 //Inicializar en null
-var selectedShadow by mutableStateOf<Shadows?>(null)
+var selectedShadow by mutableStateOf<Shadow?>(null)
 
 //Se crea _selectedTabName per a que siga mutable y poder accedir desde Screens
 val _selectedTabName = mutableStateOf("SHADOWS")
@@ -23,29 +21,16 @@ val _selectedTabName = mutableStateOf("SHADOWS")
 //Inicializar en null
 var selectedSocialLink by mutableStateOf<SocialLink?>(null)
 
-
-
-
 class ViewModel() : ViewModel() {
 
-    private val _dataList = MutableStateFlow<List<SHHADOW>>(emptyList())
 
-    fun setShadowList(data: List<SHHADOW>) {
-        _dataList.value = data
-        Log.d("LISTA TAM", _dataList.value.size.toString())
-    }
 
-    fun getDataList2(): StateFlow<List<SHHADOW>> {
-
-        return _dataList
-    }
-
-    fun setShadow(shadow: Shadows) {
+    fun setShadow(shadow: Shadow) {
 
         selectedShadow = shadow
     }
 
-    fun getShadow(): Shadows? {
+    fun getShadow(): Shadow? {
         return selectedShadow
     }
 

@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.p3re.data.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,12 +26,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.p3re.R
 import com.example.p3re.data.Fonts
-import com.example.p3re.data.Shadows
 import com.example.p3re.viewmodels.selectedShadow
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
-fun DetailedShadowScreen(shadow: Shadows) {
+fun DetailedShadowScreen(shadow: Shadow) {
 
     Box(modifier = Modifier.fillMaxSize()) {
 

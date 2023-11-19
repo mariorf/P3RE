@@ -1,23 +1,35 @@
 package com.example.p3re.data
 
-import com.example.p3re.data.Converters
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import kotlinx.serialization.Serializable
 
-//Entity = tabla
-@Entity()
-@TypeConverters(Converters::class)
-data class Shadows(
+
+@Entity(tableName = "ShadowsEntity")
+@Serializable
+data class Shadow(
 
     @PrimaryKey
-    val id: Int = 0,
-    val name: String,
-    val area: String,
-    val gem: String,
-    val lvl: Int,
-    val race: String,
-    val resists: String,
-    val skills: List<String>,
-    val stats: List<Int>
-)
+    var _key: String,
+    var name: String,
+    var area: String,
+    var gem: String,
+    var lvl: Int,
+    var race: String,
+    var resists: String,
+
+    var stats0: Int,
+    var stats1: Int,
+    var stats2: Int,
+    var stats3: Int,
+    var stats4: Int,
+    var stats5: Int,
+    var stats6: Int
+
+){
+}
+
+
+
+
+

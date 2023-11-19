@@ -1,6 +1,5 @@
 package com.example.p3re.screens
 
-import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
@@ -31,12 +30,23 @@ import androidx.navigation.NavHostController
 import androidx.room.TypeConverters
 import com.example.p3re.R
 import com.example.p3re.data.Fonts
-import com.example.p3re.data.Shadows
 import com.example.p3re.viewmodels.ViewModel
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import java.util.concurrent.Executors
+import android.os.Handler
+import android.os.Looper
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModelProvider
+import com.example.p3re.data.Shadow
+import com.example.p3re.apis.ShadowsAPI
+import com.example.p3re.database.ShadowDAO
+import com.example.p3re.viewmodels.ShadowsdbViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.concurrent.ExecutorService
 
 
 //RECIBEN COMO PARAMETROS NAV CONTROLLERS LAS FUNCIONES A LAS QUE VAS A TENER QUE PODER NAVEGAR
@@ -48,48 +58,39 @@ import java.io.InputStreamReader
 @Composable
 @TypeConverters
 //Que es este NavHostController
-fun CompendiumScreen(navController: NavHostController, context: Context) {
+fun CompendiumScreen(navController: NavHostController) {
 
-
-
-    //Leo el archivo aqui porque necesito el contexto que me pasan como parametro
-    var json: String?
-
-    //Abro el json con un InputStream
-    val inputStream = context.assets.open("shadows.json")
-
-    //BufferedReader para que sea mas rápido
-    val reader = BufferedReader(InputStreamReader(inputStream))
-
-    //Creo el string builder
-    val jsonStringBuilder = StringBuilder()
-
-    //Linea para ir metiendo al archivo final
-    var line: String?
-
-    //append en kotlin para crear el String final
-    while (reader.readLine().also { line = it } != null) {
-        jsonStringBuilder.append(line)
-    }
-
-    //Cierro buffered reader e input string
-    reader.close()
-    inputStream.close()
-
-
-    //json final
-    json = jsonStringBuilder.toString()
-
-    val gson = Gson()
-    val mapType = object : TypeToken<Map<String, Shadows>>() {}.type
-    val shadowMap: Map<String, Shadows> = gson.fromJson(json, mapType)
-
-    val shadowsList = shadowMap.values.toList()
 
     //Esto debería hacerse en el view model
     val scrollState = rememberLazyListState()
 
     val viewModel: ViewModel = viewModel()
+
+    val executor = Executors.newSingleThreadExecutor()
+
+    val handler = Handler(Looper.getMainLooper())
+
+    //var shadowsList by remember { mutableStateOf(ArrayList<Shadow>()) }
+
+    val viewModelShadowDatabase : ShadowsdbViewModel = viewModel()
+
+    //val shadowViewModel = ViewModelProvider(this).get(ShadowsdbViewModel::class.java)
+
+    /*executor.execute {
+        val api = ShadowsAPI()
+        val result = api.getShadows()
+        handler.post {
+            result?.let { shadows ->
+                shadowsList = shadows
+                shadowViewModel.insertShadows(shadowsList)
+                val allShadows = shadowViewModel.getAllShadows()
+            }
+        }
+    }*/
+
+
+
+    var shadowsList = viewModelShadowDatabase.shadowsList
 
     //BOX HACE QUE LOS ELEMENTOS SE PUEDAN SOBREPONER, POR ESO ES NECESARIA PAR HACER BACKGROUNDS
     Box(modifier = Modifier.fillMaxSize()) {
@@ -116,7 +117,6 @@ fun CompendiumScreen(navController: NavHostController, context: Context) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            //.padding(top = 30.dp)
                             .background(Color.Transparent)
                             .border(
                                 border = BorderStroke(width = 1.dp, color = Color.Black),

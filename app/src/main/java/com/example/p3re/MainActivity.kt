@@ -3,7 +3,6 @@ package com.example.p3re
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -31,15 +30,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import com.example.p3re.apis.ShadowsAPI
 import com.example.p3re.screens.NavGraph
 import com.example.p3re.ui.theme.P3RETheme
-import com.example.p3re.viewmodels.ViewModel
 import com.example.p3re.data.Fonts
 import com.example.p3re.screens.Screen
-import com.example.p3re.utils.SupabaseUtils
+import com.example.p3re.data.Shadow
+import com.example.p3re.viewmodels.ShadowsdbViewModel
+import com.example.p3re.viewmodels.ViewModel
 import kotlinx.coroutines.launch
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
 //Clase per a crear els items de la barra de navegació inferior
@@ -59,7 +64,19 @@ class MainActivity : ComponentActivity() {
 
         val viewModel: ViewModel by viewModels()
 
-        lifecycleScope.launch {
+        val shadowViewModel = ViewModelProvider(this).get(ShadowsdbViewModel::class.java)
+
+        /*val executor: ExecutorService = Executors.newSingleThreadExecutor()
+        executor.execute {
+            val api = ShadowsAPI()
+            val result = api.getShadows()
+            if (result != null) {
+                shadowViewModel.insertShadows(result)
+                val allShadows = shadowViewModel.getAllShadows()
+            }
+        }*/
+
+        /*lifecycleScope.launch {
 
             val data = SupabaseUtils.getData()
 
@@ -72,7 +89,7 @@ class MainActivity : ComponentActivity() {
             if (data != null) {
                 viewModel.setShadowList(data)
             }
-        }
+        }*/
 
 
         setContent {
