@@ -15,7 +15,7 @@ abstract class ShadowDatabase:RoomDatabase(){
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(
                     context.applicationContext,
-                    ShadowDatabase::class.java, "db"
+                    ShadowDatabase::class.java, "shadow-database"
                 ).build()
             }
             return INSTANCE!!

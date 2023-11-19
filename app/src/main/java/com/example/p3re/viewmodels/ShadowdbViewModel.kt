@@ -26,13 +26,15 @@ class ShadowsdbViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val shadowDAO: ShadowDAO
 
-    private val db: ShadowDatabase = Room.databaseBuilder(
+    /*private val db: ShadowDatabase = Room.databaseBuilder(
         application.applicationContext,
         ShadowDatabase::class.java, "shadow-database"
-    ).build()
+    ).build()*/
+
+    val database: ShadowDatabase = ShadowDatabase.DatabaseBuilder.getDatabase(application.applicationContext)
 
     init {
-        shadowDAO = db.getShadowDAO()
+        shadowDAO = database.getShadowDAO()
 
         viewModelScope.launch{
             executor.execute {
